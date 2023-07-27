@@ -1,0 +1,40 @@
+.about{
+    min-height: fit-content;
+    text-align: center;
+}
+
+.about-container{
+    padding: 0 30px;
+    margin: 100px 0;
+}
+
+.about-title{
+    font-size: 3em;
+    font-weight: 500;
+    margin: 50px 0;
+}
+
+.about-description{
+    font-size: 1.4em;
+    font-weight: 200;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+@media screen and (max-width: 992px) {
+    .about{
+        width: 100%;
+    }
+
+    .about-container{
+        padding: 0 15px;
+    }
+
+    .about-title{
+        margin-bottom: 80px;
+    }
+
+    .about-description{
+        white-space: pre-line;
+    }
+}

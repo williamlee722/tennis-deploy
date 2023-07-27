@@ -1,0 +1,6 @@
+.survey{
+    width: 100vw;
+    min-height: 100vh;
+    background-image: radial-gradient(ellipse at bottom, #f4cd7f, #ff9900);
+}
+

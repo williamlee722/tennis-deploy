@@ -1,0 +1,66 @@
+.login{
+    width: 100vw;
+    min-height: 100vh;
+    background-image: radial-gradient(ellipse at bottom, #f4cd7f, #ff9900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container{
+    width: 80%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    row-gap: 1rem;
+}
+
+.login-title{
+    font-size: 4em;
+    font-weight: 500;
+    margin: 1rem 0;
+}
+
+.login form{
+    display: grid;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.login form input, .login form button{
+    width: 40ch;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    padding: .5rem;
+    text-align: center;
+}
+
+.login form button{
+    cursor: pointer;
+    color: white;
+    background-color: rgb(26, 129, 226);
+}
+
+.login form button:hover{
+    background-color: rgb(47, 148, 242);
+}
+
+.login form a{
+    cursor: pointer;
+    font-weight: 700;
+    text-decoration: none;
+    color: black;
+}
+
+.login form a:hover{
+    text-decoration: underline;
+}
+
+.logo{
+    cursor: pointer;
+    width: 10rem;
+    margin: auto;
+}

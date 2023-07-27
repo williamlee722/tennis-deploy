@@ -1,0 +1,66 @@
+.register{
+    width: 100vw;
+    min-height: 100vh;
+    background-image: radial-gradient(ellipse at bottom, #f4cd7f, #ff9900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-container{
+    width: 80%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    row-gap: 1rem;
+}
+
+.register-title{
+    font-size: 4em;
+    font-weight: 500;
+    margin: 1rem 0;
+}
+
+.register form{
+    display: grid;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.register form input, button{
+    width: 50ch;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    padding: .5rem;
+    text-align: center;
+}
+
+.register form button{
+    cursor: pointer;
+    color: white;
+    background-color: rgb(26, 129, 226);
+}
+
+.register form button:hover{
+    background-color: rgb(47, 148, 242);
+}
+
+.register form a{
+    cursor: pointer;
+    font-weight: 700;
+    text-decoration: none;
+    color: black;
+}
+
+.register form a:hover{
+    text-decoration: underline;
+}
+
+.logo{
+    cursor: pointer;
+    width: 10rem;
+    margin: auto;
+}

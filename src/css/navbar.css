@@ -1,0 +1,239 @@
+.nav{
+    width: 100%;
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    background-color: white;
+    transition-timing-function: ease-in-out;
+    transition: .5s;
+}
+
+.nav-body{
+    width: 1140px;
+    margin: auto;
+}
+
+.nav_show{
+    background-color: transparent;
+    transition: .3 ease-in-out;
+}
+
+.app-logo{
+    cursor: pointer;
+}
+
+.app-logo img{
+    width: 150px;
+    height: auto;
+}
+
+nav{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-area{
+    display: flex;
+    width: 990px;
+}
+
+.main, .sub{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 9000;
+}
+
+.main{
+    font-size: 1.3em;
+    font-weight: 400;
+    width: 828px;
+}
+
+.sub{
+    font-size: 1em;
+    font-weight: 400;
+    width: 162px;
+}
+
+nav ul{
+    list-style: none;
+    text-align: center;
+    padding: 0;
+}
+
+nav ul li{
+    text-align: center;
+    border-right: 2px solid rgba(0, 0, 0, 0.15);
+    padding: 0 30px;
+}
+
+nav ul li:last-child{
+    border-right: none;
+}
+
+.sub li{
+    padding: 0 15px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: black;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+nav ul li a:hover{
+    color: green;
+}
+
+nav ul li a > .active{
+    color: green;
+}
+
+.hamburger{
+    display: none;
+}
+
+@media screen and (max-width: 992px) {
+    .nav-body{
+        width: 800px;
+        margin: auto;
+    }
+
+    .nav-area{
+        width: 670px;
+    }
+
+    .app-logo{
+        width: 130px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .app-logo img{
+        width: 130px;
+    }
+
+    .main{
+        font-size: 1em;
+        font-weight: 400;
+        width: 540px;
+    }
+
+    .sub{
+        font-size: .8em;
+        font-weight: 400;
+        width: 130px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .nav-body{
+        width: 100%;
+        height: 0;
+    }
+
+    nav{
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .hide-nav{
+        transform-origin: 0% 0%;
+        transform: translate(0, -150%);
+        transition: transform 0.3s linear;
+        z-index: 9000;
+    }
+
+    .show-nav{
+        transform-origin: 0% 0%;
+        transform: translate(0, 0%);
+        transition: transform 0.3s linear;
+        z-index: 9000;
+        height: calc(var(--vh, 1vh) * 100);
+    }
+
+    .main{
+        width: 100%;
+        margin: 0;
+        flex-direction: column;
+        background-color: white;
+        font-size: 1.5em;
+        z-index: 9000;
+    }
+
+    .main li{
+        height: 80px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        padding: 0;
+        z-index: 9000;
+        border-bottom: 1px solid #dddddd;
+    }
+
+    .main li:last-child{
+        border-bottom: none;
+    }
+
+    .sub{
+        width: 100%;
+        background-color: white;
+        margin-top: 0;
+        font-size: 1.5em;
+    }
+
+    .sub li{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80px;
+        width: 100%;
+        border: none;
+        padding: 0;
+        border-right: 1px solid #dddddd;
+    }
+
+    .hamburger{
+        display: block;
+    }
+
+    .mobile-nav{
+        width: 100%;
+        height: 80px !important;
+        position: fixed;
+        top: 0;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        justify-content: space-between;
+        background-color: white;
+        z-index: 1000000;
+    }
+
+    .nav-area{
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        width: 100%;
+        height: calc(var(--vh, 1vh) * 100);
+        background-color: white;
+    }
+
+    .nav{
+        height: 10px;
+    }
+
+    .backtotop{
+        z-index: 5000 !important;
+    }
+}
