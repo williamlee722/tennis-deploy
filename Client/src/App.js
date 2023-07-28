@@ -5,6 +5,7 @@ import Survey from "./pages/survey";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Portal from "./pages/portal";
+import ProtectedRoute from "./authenticate/ProtectedRoute";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
           <Route path="/test-level" element={<Survey/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
-          <Route path='/portal' element={<Portal/>}/>
+
+          <Route path='/portal' element={<ProtectedRoute><Portal/></ProtectedRoute>}/>
 
           <Route path='/*' element={<Navigate to="/"/>}/>
         </Routes>
