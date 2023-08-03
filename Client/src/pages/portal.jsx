@@ -34,7 +34,6 @@ function Portal() {
                 <div className='portal-logo'><a href='/'><Logo/></a></div>
                 <p>Welcome Indianhead95</p>
             </div>
-
             <div className='portal-grid portal-level'>
                 <p className='portal-grid-title'>Level:</p>
                 <p className='portal-grid-description'>Intermediate</p>
