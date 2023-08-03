@@ -9,8 +9,12 @@
 }
 
 .nav-body{
-    width: 1140px;
+    width: 992px;
     margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
 }
 
 .nav_show{
@@ -18,25 +22,17 @@
     transition: .3 ease-in-out;
 }
 
+.mobile-nav{
+    width: 121px;
+}
+
 .app-logo{
-    cursor: pointer;
-}
-
-.app-logo img{
-    width: 150px;
-    height: auto;
-}
-
-nav{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    width: 100px;
+    height: 10px;
 }
 
 .nav-area{
     display: flex;
-    width: 990px;
 }
 
 .main, .sub{
@@ -50,13 +46,13 @@ nav{
 .main{
     font-size: 1.3em;
     font-weight: 400;
-    width: 828px;
+    width: 750px;
 }
 
 .sub{
     font-size: 1em;
     font-weight: 400;
-    width: 162px;
+    width: 121px;
 }
 
 nav ul{
@@ -99,41 +95,6 @@ nav ul li a > .active{
 }
 
 @media screen and (max-width: 992px) {
-    .nav-body{
-        width: 800px;
-        margin: auto;
-    }
-
-    .nav-area{
-        width: 670px;
-    }
-
-    .app-logo{
-        width: 130px;
-        height: 70px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .app-logo img{
-        width: 130px;
-    }
-
-    .main{
-        font-size: 1em;
-        font-weight: 400;
-        width: 540px;
-    }
-
-    .sub{
-        font-size: .8em;
-        font-weight: 400;
-        width: 130px;
-    }
-}
-
-@media screen and (max-width: 768px) {
     .nav-body{
         width: 100%;
         height: 0;

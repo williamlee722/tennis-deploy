@@ -54,7 +54,6 @@ function Navbar() {
             <ul className='main'>
                 <li><Link to='about' activeClass="active" spy={true} smooth={true} offset={-165} duration={500} onClick={setClose}>About Us</Link></li>
                 <li><Link to='lessons' activeClass="active" spy={true} smooth={true} offset={-65} duration={500} onClick={setClose}>Lessons</Link></li>
-                <li><a href='/'>Store</a></li>
                 <li><Link to='contact' activeClass="active" spy={true} smooth={true} offset={-50} duration={500} onClick={setClose}>Contact</Link></li>
             </ul>
             <ul className='sub'>
