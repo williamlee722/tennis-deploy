@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
         //     message: "Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character",
         //   },
         unique: false,
+    },
+    isAdmin:{
+        type: Boolean,
+        required: [true, "Something went wrong, call development team."],
     }
 })
 

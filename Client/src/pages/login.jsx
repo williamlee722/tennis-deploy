@@ -14,11 +14,15 @@ function Login() {
   const [err, setErr] = useState(false);
   const [errMes, setErrMes] = useState('');
   const [logSuccess, setLogSuccess] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (logSuccess) {
-      navigate("/portal");
+      if(!isAdmin)
+        navigate("/portal");
+      else
+        navigate("/portal"); // navigate to admin page
     }
   }, [logSuccess]);
 
@@ -36,16 +40,17 @@ function Login() {
 
     axios(configuration)
     .then((result) => {
-      console.log(result); 
-      console.log(result.data.token);
+      // console.log(result); 
+      // console.log(result.data.token);
       cookies.set("Auth_TOKEN", result.data.token, {
         path: "/",
       });
 
+      setIsAdmin(result.data.isAdmin)
       setLogSuccess(true);
 
     }).catch((e) => {
-      console.log(e.message); 
+      // console.log(e.message); 
       setErr(true);
       setErrMes(e.response.data.message);
     });  

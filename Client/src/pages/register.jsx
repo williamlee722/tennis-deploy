@@ -46,7 +46,7 @@ function Register() {
 
       axios(configuration)
         .then((result) => {
-          console.log(result);
+          // console.log(result);
           alert("Registration successful.");
           setRegSuccess(true);
         }).catch((e) => {
@@ -55,7 +55,7 @@ function Register() {
         })
 
     } else {
-      console.log("Password doesnt match");
+      // console.log("Password doesnt match");
       setErr(true);
       setErrMes("Password doesnt match");
     }

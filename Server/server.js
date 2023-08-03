@@ -57,6 +57,7 @@ app.post("/login", (req, res) => {
                             res.send({
                                 message: 'Login Successful',
                                 username: user.username,
+                                isAdmin: user.isAdmin,
                                 token,
                             });
                         } else {
@@ -118,6 +119,7 @@ app.post("/register", (req, res) => {
                 username: req.body.username,
                 email: req.body.email,
                 password: hashedPassword,
+                isAdmin: false
             });
 
 

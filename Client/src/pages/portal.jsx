@@ -2,9 +2,31 @@ import React, { useEffect, useState } from 'react'
 import '../css/portal.css'
 import '../css/calendar.css'
 import Logo from '../images/logo'
-import Calendar from 'react-calendar'
+// import Calendar from 'react-calendar'
+import ClassCalendar from '../components/portal/classCalendar'
 
 function Portal() {
+
+    const events = [
+        {
+          title: 'Intermediate Class',
+          start: new Date(2023, 0, 10, 10, 0),
+          end: new Date(2023, 0, 10, 12, 0),
+          location: 'Court A',
+          description: 'This is intermediate class at Court A.', // Additional event details
+        },
+        {
+          title: 'Beginner Class',
+          start: new Date(2023, 8, 12, 14, 0),
+          end: new Date(2023, 8, 12, 16, 0),
+          location: 'Court B',
+          description: 'This is beginner class at Court B.', // Additional event details
+        },
+        // Add more event objects as needed
+    ];
+
+
+
   return (
     <div className='portal'>
         <div className='portal-container'>
@@ -29,7 +51,7 @@ function Portal() {
             <div className='portal-grid portal-calender'>
                 <p className='portal-grid-title'>Lessons</p>
 
-                <Calendar />
+                <ClassCalendar events={events}/>
             </div>
         </div>
     </div>
