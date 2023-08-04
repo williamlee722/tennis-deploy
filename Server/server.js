@@ -93,14 +93,14 @@ app.post("/login", (req, res) => {
 app.post("/register", (req, res) => {
     console.log(req.body.username, req.body.password);
 
-    if (!validator.isEmail(req.body.email)){
+    if (!validator.isEmail(req.body.email)) {
         res.status(400).send({
             message: "Not a valid e-mail!",
         });
         return;
     }
 
-    if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/g.test(req.body.password)){
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/g.test(req.body.password)) {
         res.status(400).send({
             message: "Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character!",
         });
@@ -130,10 +130,10 @@ app.post("/register", (req, res) => {
                 credits: 0,
                 feedbacks: [
                     {
-                        dateOfFeed: new Date().setHours(0,0,0,0),
+                        dateOfFeed: new Date().setHours(0, 0, 0, 0),
                         feedback: "Wellcome to tennist"
                     }
-                ]                
+                ]
             })
 
 
@@ -164,9 +164,9 @@ app.post("/portal", authenticateToken, (req, res) => {
     // console.log(req.user.username)
     const username = req.user.username
 
-    UserInfos.findOne({ username: username }).then( (userInfo) => {
+    UserInfos.findOne({ username: username }).then((userInfo) => {
         const studentLevel = userInfo.level
-        Bookings.find({level: studentLevel}).then((classList) => {
+        Bookings.find({ level: studentLevel }).then((classList) => {
             res.send({
                 username: username,
                 level: studentLevel,
@@ -174,7 +174,7 @@ app.post("/portal", authenticateToken, (req, res) => {
                 feedbacks: userInfo.feedbacks,
 
                 eventdb: classList
-            });  
+            });
         })
         // console.log(username)
         // console.log(userInfo.level)

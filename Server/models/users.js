@@ -1,22 +1,22 @@
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
     first_name: {
-        type:String,
+        type: String,
         required: [true, "First Name cant be empty"],
         unique: false,
     },
     last_name: {
-        type:String,
+        type: String,
         required: [true, "Last Name cant be empty"],
         unique: false,
     },
     username: {
-        type:String,
+        type: String,
         required: [true, "Username cant be empty"],
         unique: [true, "Username Exist"],
     },
     email: {
-        type:String,
+        type: String,
         required: [true, "E-Mail cant be empty"],
         unique: [true, "Email Exist"],
     },
@@ -33,12 +33,12 @@ const userSchema = new mongoose.Schema({
         //   },
         unique: false,
     },
-    isAdmin:{
+    isAdmin: {
         type: Boolean,
         required: [true, "Something went wrong, call development team."],
     }
 })
 
-const User = mongoose.model("User",userSchema)
+const User = mongoose.model("User", userSchema)
 
 module.exports = User

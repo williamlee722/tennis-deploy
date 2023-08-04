@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const bookingSchema = new mongoose.Schema({
-    day:{
+    day: {
         type: Date // Year - Month - Day only
     },
-    start:{
+    start: {
         type: Date // hour:minute only
     },
-    end:{
+    end: {
         type: Date // hour:minute only
     },
     level: {
@@ -22,9 +22,9 @@ const bookingSchema = new mongoose.Schema({
             status: Number // 1- Ok 2- Waitlist 3- Rejected            
         }
     ]
-    
+
 })
 
-const Booking = mongoose.model("Booking",bookingSchema)
+const Booking = mongoose.model("Booking", bookingSchema)
 
 module.exports = Booking

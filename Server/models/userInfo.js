@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 const userInfoSchema = new mongoose.Schema({
     username: {
-        type:String,
+        type: String,
     },
     level: {
-        type:String, // beginner, intermediate, advance
+        type: String, // beginner, intermediate, advance
     },
     credits: {
-        type:Number,
+        type: Number,
     },
     feedbacks: {
         type: [
@@ -19,6 +19,6 @@ const userInfoSchema = new mongoose.Schema({
     }
 })
 
-const UserInfos = mongoose.model("UserInfo",userInfoSchema)
+const UserInfos = mongoose.model("UserInfo", userInfoSchema)
 
 module.exports = UserInfos
