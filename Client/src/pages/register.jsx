@@ -5,7 +5,6 @@ import Logo from '../images/logo'
 import axios from "axios";
 const server_url = process.env.REACT_APP_SERVER_BASE_URL;
 
-
 function Register() {
 
   const [firstName, setFirstName] = useState('');

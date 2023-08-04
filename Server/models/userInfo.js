@@ -4,7 +4,7 @@ const userInfoSchema = new mongoose.Schema({
         type:String,
     },
     level: {
-        type:String,
+        type:String, // beginner, intermediate, advance
     },
     credits: {
         type:Number,
@@ -12,13 +12,13 @@ const userInfoSchema = new mongoose.Schema({
     feedbacks: {
         type: [
             {
-                dateOfFeed: String,
+                dateOfFeed: Date, // Year Month Day 
                 feedback: String
             }
         ]
     }
 })
 
-const UserInfo = mongoose.model("UserInfo",userInfoSchema)
+const UserInfos = mongoose.model("UserInfo",userInfoSchema)
 
-module.exports = UserInfo
+module.exports = UserInfos

@@ -44,6 +44,7 @@ function Login() {
       // console.log(result.data.token);
       cookies.set("Auth_TOKEN", result.data.token, {
         path: "/",
+        expires: new Date(Date.now() + (3600 * 1000)),
       });
 
       setIsAdmin(result.data.isAdmin)

@@ -4,26 +4,78 @@ import '../css/calendar.css'
 import Logo from '../images/logo'
 // import Calendar from 'react-calendar'
 import ClassCalendar from '../components/portal/classCalendar'
+import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+const server_url = process.env.REACT_APP_SERVER_BASE_URL;
+const token = cookies.get("Auth_TOKEN");
 
 function Portal() {
 
-    const events = [
-        {
-          title: 'Intermediate Class',
-          start: new Date(2023, 0, 10, 10, 0),
-          end: new Date(2023, 0, 10, 12, 0),
-          location: 'Court A',
-          description: 'This is intermediate class at Court A.', // Additional event details
-        },
-        {
-          title: 'Beginner Class',
-          start: new Date(2023, 8, 12, 14, 0),
-          end: new Date(2023, 8, 12, 16, 0),
-          location: 'Court B',
-          description: 'This is beginner class at Court B.', // Additional event details
-        },
-        // Add more event objects as needed
-    ];
+    const [retVal, setRetVal] = useState("");
+    const [username, setUsername] = useState("");
+    const [level, setLevel] = useState("");
+    const [credits, setCredits] = useState("");
+    const [feedbacks, setFeedbacks] = useState("");
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        const configuration = {
+          method: 'post',
+          url: server_url + '/portal',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+
+        axios(configuration)
+          .then((result) => {
+            setRetVal(result.data);
+          })
+          .catch((error) => {
+            error = new Error();
+          });
+      }, []); 
+    
+      useEffect(() => {
+        setUsername(retVal.username);
+        setLevel(retVal.level);
+        setCredits(retVal.credits);
+    
+        let feedString = '';
+    
+        if (retVal.feedbacks?.length > 0) {
+            retVal.feedbacks.forEach((feedback) => {
+              const dateString = feedback.dateOfFeed; 
+          
+              const date = new Date(dateString);
+          
+              const options = {
+                month: 'long',
+                day: '2-digit',
+              };
+          
+              const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+          
+              feedString += formattedDate + " : " + feedback.feedback + "\n";
+            });
+        }
+        setFeedbacks(feedString);
+    
+        let eventsList = [];        
+    
+        setEvents(eventsList);
+      }, [retVal]); 
+
+    // events = [
+    //     {
+    //       title: 'Intermediate Class',
+    //       start: new Date(2023, 0, 10, 10, 0),
+    //       end: new Date(2023, 0, 10, 12, 0),
+    //       location: 'Court A',
+    //       description: 'This is intermediate class at Court A.', 
+    //     }
+    // ];
 
 
 
@@ -32,19 +84,20 @@ function Portal() {
         <div className='portal-container'>
             <div className='portal-grid portal-user'>
                 <div className='portal-logo'><a href='/'><Logo/></a></div>
-                <p>Welcome Indianhead95</p>
+                <p>Welcome {username}</p>
             </div>
             <div className='portal-grid portal-level'>
                 <p className='portal-grid-title'>Level:</p>
-                <p className='portal-grid-description'>Intermediate</p>
+                <p className='portal-grid-description'>{level}</p>
             </div>
             <div className='portal-grid portal-credit'>
-                <p className='portal-grid-title'>Credits: 8</p>
+                <p className='portal-grid-title'>Credits: {credits}</p>
                 <a href='/'>Buy More</a>
             </div>
             <div className='portal-grid portal-feedback'>
                 <p className='portal-grid-title'>Feedback</p>
-                <p className='portal-grid-feedback'><span>June 28</span>: <span>Fronthand is getting better, keep up the good work!</span></p>
+                {feedbacks}
+                {/* <p className='portal-grid-feedback'><span>June 28</span>: <span>Fronthand is getting better, keep up the good work!</span></p> */}
                 <a href='/'>More</a>
             </div>
             <div className='portal-grid portal-calender'>

@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const User = require("./models/users.js");
 const Bookings = require("./models/bookings.js")
-const UserInfo = require("./models/userInfo.js")
+const UserInfos = require("./models/userInfo.js")
 const cors = require("cors");
 const bodyParser = require("body-parser")
 const bcrypt = require("bcrypt");
@@ -52,8 +52,8 @@ app.post("/login", (req, res) => {
                                 { expiresIn: '1h' }
                             );
 
-                            console.log('Login successful - 1');
-                            console.log(token);
+                            // console.log('Login successful - 1');
+                            // console.log(token);
 
                             // Return success response with token and username
                             res.send({
@@ -124,6 +124,19 @@ app.post("/register", (req, res) => {
                 isAdmin: false
             });
 
+            const userInfo = new UserInfo({
+                username: req.body.username,
+                level: 'undecided',
+                credits: 0,
+                feedbacks: [
+                    {
+                        dateOfFeed: new Date().setHours(0,0,0,0),
+                        feedback: "Wellcome to tennist"
+                    }
+                ]                
+            })
+
+
 
             console.log(user.first_name, user.last_name, user.username, user.email, user.password);
             // save the new user
@@ -131,6 +144,7 @@ app.post("/register", (req, res) => {
                 .save()
                 // return success if the new user is added to the database successfully
                 .then((result) => {
+                    userInfo.save()
                     res.send({
                         message: "User Created Successfully",
                         result,
@@ -144,13 +158,24 @@ app.post("/register", (req, res) => {
         });
 });
 
-app.get("/portal", authenticateToken, (req, res) => {
-    // req.user -> username
-    console.log(req.user)
-    res.send({
-        message: "It is ok",
-    })
+app.post("/portal", authenticateToken, (req, res) => {
+    // console.log("in server portal")
+    // // req.user -> username
+    // console.log(req.user.username)
+    const username = req.user.username
 
+    UserInfos.findOne({ username: username }).then( (userInfo) => {
+        // console.log(username)
+        // console.log(userInfo.level)
+        // console.log(userInfo.credits)
+        // console.log(userInfo.feedbacks)
+        res.send({
+            username: username,
+            level: userInfo.level,
+            credits: userInfo.credits,
+            feedbacks: userInfo.feedbacks
+        });   
+    })
 })
 
 app.listen(5000, () => {
