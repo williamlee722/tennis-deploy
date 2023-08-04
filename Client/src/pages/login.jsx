@@ -18,11 +18,14 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(logSuccess)
     if (logSuccess) {
       if(!isAdmin)
         navigate("/portal");
       else
         navigate("/portal"); // navigate to admin page
+    }else{
+      console.log("Something went wrong with log success")
     }
   }, [logSuccess]);
 
@@ -42,11 +45,20 @@ function Login() {
     .then((result) => {
       // console.log(result); 
       // console.log(result.data.token);
+      // Delete previous cookie
+      // if (cookies.get("Auth_TOKEN")) {
+      //   cookies.set("Auth_TOKEN", "", {
+      //     path: "/",
+      //     expires: new Date(0), // Set to a past date to delete the cookie
+      //   });
+      // }
+
       cookies.set("Auth_TOKEN", result.data.token, {
         path: "/",
         expires: new Date(Date.now() + (3600 * 1000)),
       });
 
+      console.log(result.data.message)
       setIsAdmin(result.data.isAdmin)
       setLogSuccess(true);
 

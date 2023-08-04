@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // DB Link
-const dbUrl = "mongodb+srv://berkeozten:lsTBZWheHeEymeqc@jjtennis.mvvk8s9.mongodb.net/jjtennisDB?retryWrites=true&w=majority";
+const dbUrl = process.env.DB_URL;
 async function dbConnect() {
     mongoose.connect(dbUrl)
         .then(() => {
@@ -124,7 +124,7 @@ app.post("/register", (req, res) => {
                 isAdmin: false
             });
 
-            const userInfo = new UserInfo({
+            const userInfo = new UserInfos({
                 username: req.body.username,
                 level: 'undecided',
                 credits: 0,

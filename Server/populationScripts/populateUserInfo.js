@@ -5,7 +5,8 @@ const UserInfo = require('../models/userInfo');
 const db = mongoose.connection;
 
 // DB Link
-const dbUrl = "mongodb+srv://berkeozten:lsTBZWheHeEymeqc@jjtennis.mvvk8s9.mongodb.net/jjtennisDB?retryWrites=true&w=majority";
+require('dotenv').config();
+const dbUrl = process.env.DB_URL;
 async function dbConnect() {
     mongoose.connect(dbUrl)
         .then(() => {
