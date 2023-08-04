@@ -1,0 +1,4 @@
+.rbc-button-link  { 
+    /* This was originally 50 on css library */
+    width: 5ch !important; /* Change the width to 5ch */
+}

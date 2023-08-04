@@ -165,16 +165,27 @@ app.post("/portal", authenticateToken, (req, res) => {
     const username = req.user.username
 
     UserInfos.findOne({ username: username }).then( (userInfo) => {
+        const studentLevel = userInfo.level
+        Bookings.find({level: studentLevel}).then((classList) => {
+            res.send({
+                username: username,
+                level: studentLevel,
+                credits: userInfo.credits,
+                feedbacks: userInfo.feedbacks,
+
+                eventdb: classList
+            });  
+        })
         // console.log(username)
         // console.log(userInfo.level)
         // console.log(userInfo.credits)
         // console.log(userInfo.feedbacks)
-        res.send({
-            username: username,
-            level: userInfo.level,
-            credits: userInfo.credits,
-            feedbacks: userInfo.feedbacks
-        });   
+        // res.send({
+        //     username: username,
+        //     level: studentLevel,
+        //     credits: userInfo.credits,
+        //     feedbacks: userInfo.feedbacks
+        // });   
     })
 })
 

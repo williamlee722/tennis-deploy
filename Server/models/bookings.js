@@ -1,13 +1,21 @@
 const mongoose = require("mongoose");
 const bookingSchema = new mongoose.Schema({
-    date:{
+    day:{
         type: Date // Year - Month - Day only
+    },
+    start:{
+        type: Date // hour:minute only
+    },
+    end:{
+        type: Date // hour:minute only
     },
     level: {
         type: String
         // value in beginner, intermediate, advance
     },
-    status: String, // 1- Open 2- Full 3- Canceled
+    status: String, // Open Full Canceled
+    location: String,
+    description: String,
     students: [
         {
             username: String,

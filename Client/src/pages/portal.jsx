@@ -16,7 +16,7 @@ function Portal() {
     const [username, setUsername] = useState("");
     const [level, setLevel] = useState("");
     const [credits, setCredits] = useState("");
-    const [feedbacks, setFeedbacks] = useState("");
+    const [feedbacksArr, setFeedbacksArr] = useState([]);
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
@@ -42,7 +42,7 @@ function Portal() {
         setLevel(retVal.level);
         setCredits(retVal.credits);
     
-        let feedString = '';
+        let feedArr = []
     
         if (retVal.feedbacks?.length > 0) {
             retVal.feedbacks.forEach((feedback) => {
@@ -57,25 +57,31 @@ function Portal() {
           
               const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
           
-              feedString += formattedDate + " : " + feedback.feedback + "\n";
+              feedArr.push({ date: formattedDate, text: feedback.feedback });
+
             });
         }
-        setFeedbacks(feedString);
-    
-        let eventsList = [];        
+        setFeedbacksArr(feedArr);
+        
+        let eventsList = [];  
+
+        if (retVal.eventdb?.length > 0) {
+            retVal.eventdb.forEach((event) => {
+              console.log(event)
+              eventsList.push({
+                title: event.level,
+                day: event.day,
+                start: event.start,
+                end: event.end,
+                status: event.status,
+                location: event.location,
+                description: event.description
+              })
+            });
+        }     
     
         setEvents(eventsList);
-      }, [retVal]); 
-
-    // events = [
-    //     {
-    //       title: 'Intermediate Class',
-    //       start: new Date(2023, 0, 10, 10, 0),
-    //       end: new Date(2023, 0, 10, 12, 0),
-    //       location: 'Court A',
-    //       description: 'This is intermediate class at Court A.', 
-    //     }
-    // ];
+    }, [retVal]); 
 
 
 
@@ -96,7 +102,12 @@ function Portal() {
             </div>
             <div className='portal-grid portal-feedback'>
                 <p className='portal-grid-title'>Feedback</p>
-                {feedbacks}
+                {/* {feedbacks} */}
+                {feedbacksArr.map((feed, index) => (
+                    <p className='portal-grid-feedback' key={index}>
+                    <span>{feed.date}</span>: <span>{feed.text}</span>
+                    </p>
+                ))}
                 {/* <p className='portal-grid-feedback'><span>June 28</span>: <span>Fronthand is getting better, keep up the good work!</span></p> */}
                 <a href='/'>More</a>
             </div>
