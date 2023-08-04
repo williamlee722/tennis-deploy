@@ -9,7 +9,7 @@ const ProtectedRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
   useEffect(() => {
-    const token = cookies.get('TOKEN');
+    const token = cookies.get('Auth_TOKEN');
     if (token) {
       try {
         const decodedUser = jwt_decode(token);

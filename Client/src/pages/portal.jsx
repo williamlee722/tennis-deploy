@@ -8,36 +8,39 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 const server_url = process.env.REACT_APP_SERVER_BASE_URL;
-const token = cookies.get("Auth_TOKEN");
 
 function Portal() {
 
+    
     const [retVal, setRetVal] = useState("");
     const [username, setUsername] = useState("");
     const [level, setLevel] = useState("");
     const [credits, setCredits] = useState("");
     const [feedbacksArr, setFeedbacksArr] = useState([]);
     const [events, setEvents] = useState([]);
+    
+    
 
     useEffect(() => {
-        const configuration = {
-          method: 'post',
-          url: server_url + '/portal',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-
-        axios(configuration)
-          .then((result) => {
-            setRetVal(result.data);
-          })
-          .catch((error) => {
-            error = new Error();
-          });
-      }, []); 
+      const configuration = {
+        method: 'post',
+        url: server_url + '/portal',
+        headers: {
+          Authorization: `Bearer ${cookies.get("Auth_TOKEN")}`,
+        },
+      };
+  
+      axios(configuration)
+        .then((result) => {
+          console.log(result.data.username)
+          setRetVal(result.data);
+        })
+        .catch((error) => {
+          error = new Error();
+      });
+    }, []); 
     
-      useEffect(() => {
+    useEffect(() => {
         setUsername(retVal.username);
         setLevel(retVal.level);
         setCredits(retVal.credits);
@@ -60,7 +63,7 @@ function Portal() {
               feedArr.push({ date: formattedDate, text: feedback.feedback });
 
             });
-        }
+      }
         setFeedbacksArr(feedArr);
         
         let eventsList = [];  
