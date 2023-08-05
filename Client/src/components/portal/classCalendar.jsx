@@ -8,13 +8,13 @@ import moment from 'moment';
 const EventDetails = ({ event }) => (
   <div className="custom-event-wrapper">
     <div className="custom-event-wrapper">
-      <p className="custom-event-title" style={{ fontSize: '14px', fontFamily: 'Arial, sans-serif' }}>
+      <p className="custom-event-title">
         <strong>{event.title}</strong>
       </p>
-      <p className="custom-event-time" style={{ fontSize: '12px', fontFamily: 'Arial, sans-serif' }}>
+      <p className="custom-event-time">
         {moment(event.start).format('LT')} - {moment(event.end).format('LT')}
       </p>
-      <p className="custom-event-location" style={{ fontSize: '12px', fontFamily: 'Arial, sans-serif' }}>
+      <p className="custom-event-location">
         {event.location}
       </p>
     </div>
@@ -25,15 +25,14 @@ const ClassCalendar = ({ events }) => {
   const localizer = momentLocalizer(moment);
 
   return (
-    <div>
-      <h2>Event Calendar</h2>
+    <div className='calendar'>
       <Calendar
         localizer={localizer}
         events={events}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 1000, width: '80vw' }} // Adjust the height according to your requirements
         views={['month']} // Show only the month view
+        toolbar={false}
         components={{
           event: EventDetails, // Use the custom event component for rendering events
         }}

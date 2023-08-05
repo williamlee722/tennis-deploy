@@ -1,3 +1,22 @@
+.calendar{
+    box-sizing: border-box;
+    width: 70vw;
+    min-height: 80vh;
+    margin: auto;
+}
+
+.rbc-toolbar{
+    width: 30%;
+}
+
+.rbc-btn-group{
+    width: 20px;
+}
+
+.rbc-btn-group button{
+    width: 150px;
+}
+
 .rbc-button-link  { 
     /* This was originally 50 on css library */
     width: 5ch !important; /* Change the width to 5ch */
