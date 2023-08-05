@@ -1,0 +1,138 @@
+.admin{
+    width: 100vw;
+    min-height: 100vh;
+    background-image: radial-gradient(ellipse at bottom, #f4cd7f, #ff9900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-container{
+    width: 80%;
+    display: grid;
+    grid-template-areas: 
+            'user'
+            'members'
+            'schedule';
+    gap: 10px;
+    font-size: 2rem;
+    padding: 2rem 0;
+}
+
+.admin-grid{
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 1rem;
+    padding: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.admin-user{
+    grid-area: user;
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+
+.admin-user{
+    text-align: end;
+}
+
+.admin-members{
+    grid-area: members;
+}
+
+.admin-schedule{
+    grid-area: schedule;
+}
+
+.admin-credit a, .admin-feedback a{
+    height: fit-content;
+    width: fit-content;
+    border-radius: 1rem;
+    padding: .5rem 2rem;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(26, 129, 226);
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    font-size: 1.5rem;
+}
+
+.admin-credit a:hover, .admin-feedback a:hover{
+    background-color: rgb(47, 148, 242);
+}
+
+.admin-feedback{  
+    grid-area: feedback;
+    justify-content: space-between;
+}
+
+.admin-calender{
+    grid-area: calendar;
+}
+
+.admin-logo{
+    width: 12rem;
+}
+
+.admin-grid-title{
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.admin-grid-table{
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 0;
+}
+
+.admin-grid-table table{
+    width: 100%;
+}
+
+.admin-grid-table table, .admin-grid-table td, .admin-grid-table th, .admin-grid-table select {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.admin-grid-table th, .admin-grid-table td{
+    font-size: 1rem;
+    font-weight: 300;
+    text-align: center;
+}
+
+.admin-grid-table th{
+    font-weight: 500;
+}
+
+.admin-grid-table input{
+    width: 50%;
+}
+
+.admin-grid-table input, .admin-grid-table select{
+    text-align: center;
+    margin: 10px 0;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.admin-schedule a{
+    height: fit-content;
+    width: fit-content;
+    border-radius: 1rem;
+    padding: .5rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(26, 129, 226);
+    text-decoration: none;
+}
+
+.admin-schedule a:hover{
+    background-color: rgb(47, 148, 242);
+}

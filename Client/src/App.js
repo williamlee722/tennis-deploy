@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import Portal from "./pages/portal";
 import ProtectedRoute from "./authenticate/ProtectedRoute";
+import Admin from "./pages/admin";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/register' element={<Register/>}/>
 
           <Route path='/portal' element={<ProtectedRoute><Portal/></ProtectedRoute>}/>
+          <Route path='/admin' element={<Admin/>}/>
 
           <Route path='/*' element={<Navigate to="/"/>}/>
         </Routes>
