@@ -4,6 +4,7 @@ import '../../css/navbar.css'
 import Logo from '../../images/logo';
 import { useLocation } from 'react-router-dom'
 import {Squash as Hamburger} from 'hamburger-react';
+import user from '../../images/user.svg'
 
 var style_nav;
 
@@ -59,6 +60,8 @@ function Navbar() {
             <ul className='sub'>
                 <li><a href='/login'>Login</a></li>
                 <li><a href='/register'>Register</a></li>
+                <li><img style={{width: '20px'}} src={user}/></li>
+                <li><a href='/register'>Logout</a></li>
             </ul>   
           </div>
         </nav>
