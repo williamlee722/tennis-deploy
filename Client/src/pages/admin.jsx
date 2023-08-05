@@ -10,7 +10,8 @@ const server_url = process.env.REACT_APP_SERVER_BASE_URL;
 
 function Admin() {
 
-  const courtList = ['Hyde Park','Lafarge Park', 'Court 101', 'Court 102', 'Court 201', 'Court 202']
+  const courtList = [{value: "Hyde Park", label: 'Hyde Park'}, {value: "Lafarge Park", label: 'Lafarge Park'}]
+  const levels = [{value: "beginner", label: 'Beginner'}, {value: 'intermediate', label: 'Intermediate'}, {value: 'advance', label: 'Advance'}]
   const [bookingsList, setBookingsList] = useState([])
   const [userInfoList, setUserInfoList] = useState([])
   const [retVal, setRetVal] = useState({});
@@ -47,6 +48,7 @@ function Admin() {
     }    
   },[retVal])
 
+  console.log(courtList[1].value)
 
 
   return (
@@ -123,10 +125,12 @@ function Admin() {
                     <tr key={index}>
                       <td><input type='date' value={new Date(booking.day).toISOString().split('T')[0]}/></td>
                       <td>{booking.students.map((student) => student.username).join(', ')}</td>
-                      <td><select>
-                        {courtList.map((court) => {
-                          <option value={court}>{court}</option>
-                        })}
+                      <td><select value={booking.location}>
+                      {courtList.map((court) => (
+                        <option key={court.value} value={court.value}>
+                          {court.label}
+                        </option>
+                      ))}
                       </select></td>
                       <td><select value={booking.status}>        
                         <option value="Open">On-Going Not Full</option>
