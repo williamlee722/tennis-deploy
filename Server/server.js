@@ -158,6 +158,7 @@ app.post("/register", (req, res) => {
         });
 });
 
+// Get into portal
 app.post("/portal", authenticateToken, (req, res) => {
     // console.log("in server portal")
     // // req.user -> username
@@ -186,6 +187,28 @@ app.post("/portal", authenticateToken, (req, res) => {
         //     credits: userInfo.credits,
         //     feedbacks: userInfo.feedbacks
         // });   
+    })
+})
+
+// Admin data
+app.post("/admin/getData", authenticateToken, (req, res) => {
+    // Check if admin first
+    const username = req.user.username
+    User.findOne({ username: username }).then((userInfo) => {
+        if(!userInfo.isAdmin){
+            res.status(400).send({
+                message: "Not Admin!"
+            });
+        }
+    });
+
+    UserInfos.find({}).then((userInfo)=>{
+        Bookings.find({}).then((bookings) => {
+            res.send({
+                userInfos: userInfo,
+                bookings: bookings,
+            });
+        })
     })
 })
 

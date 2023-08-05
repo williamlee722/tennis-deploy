@@ -23,7 +23,7 @@ function Login() {
       if (!isAdmin)
         navigate("/portal");
       else
-        navigate("/portal"); // navigate to admin page
+        navigate("/admin"); // navigate to admin page
     } else {
       console.log("Something went wrong with log success")
     }

@@ -19,7 +19,7 @@ function App() {
           <Route path='/register' element={<Register/>}/>
 
           <Route path='/portal' element={<ProtectedRoute><Portal/></ProtectedRoute>}/>
-          <Route path='/admin' element={<Admin/>}/>
+          <Route path='/admin' element={<ProtectedRoute><Admin/></ProtectedRoute>}/>
 
           <Route path='/*' element={<Navigate to="/"/>}/>
         </Routes>
