@@ -136,3 +136,8 @@
 .admin-schedule a:hover{
     background-color: rgb(47, 148, 242);
 }
+
+.date-tr{
+    width: 25ch;
+    margin: 0;
+}

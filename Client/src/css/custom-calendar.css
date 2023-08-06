@@ -31,12 +31,6 @@
     color: transparent;
 }
 
-.rbc-current button{
-    color: blue;
-    font-weight: 700;
-    text-decoration: underline;
-}
-
 @media screen and (max-width: 992px) {
     .rbc-header span{
         font-size: 1.2rem;

@@ -79,7 +79,12 @@ function Admin() {
                     <tr key={index}>
                       <td>{userInfo.username}</td>
                       {/* Add on click modal here */}
-                      <td><input type='text' value={userInfo.level} /></td>
+                      <td>
+                        <select value={userInfo.level}>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select></td>
                       <td><input type='number' value={userInfo.credits} /></td>
                       <td>
                         <select>
@@ -128,7 +133,7 @@ function Admin() {
                 {
                   bookingsList?.length > 0 && bookingsList.map((booking, index) => (
                     <tr key={index}>
-                      <td><input type='date' value={new Date(booking.day).toISOString().split('T')[0]}/></td>
+                      <td className='date-tr'><input type='date' value={new Date(booking.day).toISOString().split('T')[0]}/></td>
                       <td>{booking.students.map((student) => student.username).join(', ')}</td>
                       <td><select value={booking.location}>
                       {courtList.map((court) => (
@@ -173,7 +178,7 @@ function Admin() {
               </tbody>
             </table>
           </div>
-          <Link to="/editlesson" state={{ background: location }}>Add</Link>
+          <Link to="/addlesson" state={{ background: location }}>Add</Link>
         </div>
       </div>
     </div>
