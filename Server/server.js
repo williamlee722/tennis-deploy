@@ -165,51 +165,72 @@ app.post("/portal", authenticateToken, (req, res) => {
     // console.log(req.user.username)
     const username = req.user.username
 
-    UserInfos.findOne({ username: username }).then((userInfo) => {
-        const studentLevel = userInfo.level
-        Bookings.find({ level: studentLevel }).then((classList) => {
-            res.send({
-                username: username,
-                level: studentLevel,
-                credits: userInfo.credits,
-                feedbacks: userInfo.feedbacks,
-
-                eventdb: classList
-            });
-        })
-        // console.log(username)
-        // console.log(userInfo.level)
-        // console.log(userInfo.credits)
-        // console.log(userInfo.feedbacks)
-        // res.send({
-        //     username: username,
-        //     level: studentLevel,
-        //     credits: userInfo.credits,
-        //     feedbacks: userInfo.feedbacks
-        // });   
-    })
+    try {
+        User.findOne({ username: username }).then((userInfo) => {
+            if(!userInfo.isAdmin){
+                UserInfos.findOne({ username: username }).then((userInfo) => {
+                    const studentLevel = userInfo.level
+                    Bookings.find({ level: studentLevel }).then((classList) => {
+                        res.send({
+                            username: username,
+                            level: studentLevel,
+                            credits: userInfo.credits,
+                            feedbacks: userInfo.feedbacks,
+            
+                            eventdb: classList
+                        });
+                    })
+                    // console.log(username)
+                    // console.log(userInfo.level)
+                    // console.log(userInfo.credits)
+                    // console.log(userInfo.feedbacks)
+                    // res.send({
+                    //     username: username,
+                    //     level: studentLevel,
+                    //     credits: userInfo.credits,
+                    //     feedbacks: userInfo.feedbacks
+                    // });   
+                })
+            }else{
+                res.status(400).send({
+                    message: "Something went wrong please login again!"
+                });
+            }
+        })       
+    } catch (error) {
+        res.status(400).send({
+            message: "Something went wrong please login again!"
+        });
+    }
+    
 })
 
 // Admin data
 app.post("/admin/getData", authenticateToken, (req, res) => {
     // Check if admin first
-    const username = req.user.username
-    User.findOne({ username: username }).then((userInfo) => {
-        if(!userInfo.isAdmin){
-            res.status(400).send({
-                message: "Not Admin!"
-            });
-        }else{
-            UserInfos.find({}).then((userInfo)=>{
-                Bookings.find({}).then((bookings) => {
-                    res.send({
-                        userInfos: userInfo,
-                        bookings: bookings,
-                    });
+    try {
+        const username = req.user.username
+        User.findOne({ username: username }).then((userInfo) => {
+            if(!userInfo.isAdmin){
+                res.status(400).send({
+                    message: "Not Admin!"
+                });
+            }else{
+                UserInfos.find({}).then((userInfo)=>{
+                    Bookings.find({}).then((bookings) => {
+                        res.send({
+                            userInfos: userInfo,
+                            bookings: bookings,
+                        });
+                    })
                 })
-            })
-        }
-    });    
+            }
+        });  
+    } catch (error) {
+        res.status(400).send({
+            message: "Not Admin!"
+        });
+    }      
 })
 
 app.listen(8000, () => {

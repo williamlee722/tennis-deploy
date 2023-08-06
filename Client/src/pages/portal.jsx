@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import '../css/portal.css'
 import '../css/calendar.css'
 import Logo from '../images/logo'
@@ -18,7 +18,7 @@ function Portal() {
   const [credits, setCredits] = useState("");
   const [feedbacksArr, setFeedbacksArr] = useState([]);
   const [events, setEvents] = useState([]);
-
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -37,6 +37,8 @@ function Portal() {
       })
       .catch((error) => {
         error = new Error();
+        cookies.remove("Auth_TOKEN", { path: "/" });
+        navigate("/login");
       });
   }, []);
 
