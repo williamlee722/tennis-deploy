@@ -3,7 +3,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import '../../css/custom-calendar.css';
 import moment from 'moment';
-import { useHref } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const EventDetails = ({ event }) => (
   <div className="custom-event-wrapper">
@@ -24,9 +24,12 @@ const EventDetails = ({ event }) => (
 const ClassCalendar = ({ events }) => {
   const localizer = momentLocalizer(moment);
 
+  const navigate = useNavigate();
+
   return (
     <div className='calendar'>
       <Calendar
+        selectable
         localizer={localizer}
         events={events}
         startAccessor="start"
@@ -35,6 +38,7 @@ const ClassCalendar = ({ events }) => {
         components={{
           event: EventDetails,
         }}
+        onSelectEvent={event => navigate('/details')}
       />
     </div>
   );

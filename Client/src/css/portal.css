@@ -63,6 +63,10 @@
     font-size: 1rem;
 }
 
+.portal-feedback a{
+    width: 20ch;
+}
+
 .portal-credit a:hover, .portal-feedback a:hover{
     background-color: rgb(47, 148, 242);
 }
@@ -93,14 +97,14 @@
 
 .portal-grid-feedback{
     font-size: 1rem;
-    width: 50ch;
-    margin: 1.5rem 0;
+    width: 60ch;
     text-align: center;
     align-self: center;
+    display: flex;
 }
 
 .portal-grid-feedback table td{
-    width: 55ch;
+    width: 35ch;
     align-self: center;
 }
 
