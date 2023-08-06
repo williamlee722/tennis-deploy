@@ -95,3 +95,9 @@
   border: 1px solid black;
   border-collapse: collapse;
 }
+
+.modal .date{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}

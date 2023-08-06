@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import '../../css/modal.css'
 
-function EditLesson() {
+function AddLesson() {
 
   const navigate = useNavigate();
 
@@ -10,10 +10,13 @@ function EditLesson() {
       <div className="modal">
         <p className="modal-title">Add Lesson</p>
         <form>
-          <label name="zelleid">Zelle ID:</label>
-          <input type="email" name="zelleid" value={"williamjongmin@gmail.com"}/>
-          <label name="credit">Credit (USD):</label>
-          <input type="number" name="credit" min="0" max="100" placeholder="Amount sent using Zelle"/>
+          <label name="date">Date:</label>
+          <input className="date" type="date" name="date"/>
+          <label name="location">Location:</label>
+          <select name="location">        
+            <option value="1">Hyde Park</option>
+            <option value="2">Lafarge Park</option>
+          </select>
           <div className="button-container">
             <input className="button" type="submit" value="Confirm"/>
             <button onClick={() => navigate('/portal')}>Cancel</button>
@@ -24,4 +27,4 @@ function EditLesson() {
   )
 }
 
-export default EditLesson
+export default AddLesson
