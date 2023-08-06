@@ -53,14 +53,22 @@ function Admin() {
     }    
   },[retVal])
 
-  console.log(courtList[1].value)
+  const handleLogout = () => {
+    cookies.remove("Auth_TOKEN", { path: "/" });
+  };
 
 
   return (
     <div className='admin'>
       <div className='admin-container'>
         <div className='admin-grid admin-user'>
-          <div className='admin-logo'><a href='/'><Logo /></a></div>
+          <div className='admin-user-header'>
+            <div className='admin-logo'><a href='/'><Logo /></a></div>
+            <ul className='admin-user-btn'>
+              <li><Link href='/notifications'>Notifications</Link></li>
+              <li><a className='logout' href='/home' onClick={handleLogout}>Logout</a></li>
+            </ul>
+          </div>
           <p>Welcome Coach Richard</p>
         </div>
         <div className='admin-grid admin-members'>
@@ -95,24 +103,6 @@ function Admin() {
                     </tr>
                   ))
                 }
-                {/* <tr>
-                  <td>William</td>
-                  <td><input type='text' value={'Advanced'}/></td>
-                  <td><input type='number' value={10}/></td>
-                  <td><select>        
-                    <option value="active">Active</option>
-                    <option value="suspend">Suspend</option>
-                  </select></td>
-                </tr>
-                <tr>
-                  <td>Berke</td>
-                  <td><input type='text' value={'Advanced'}/></td>
-                  <td><input type='number' value={10}/></td>
-                  <td><select>        
-                    <option value="active">Active</option>
-                    <option value="suspend">Suspend</option>
-                  </select></td>
-                </tr> */}
               </tbody>
             </table>
           </div>
@@ -150,31 +140,6 @@ function Admin() {
                     </tr>
                   ))
                 }
-
-                {/* <tr>
-                  <td><input type='date' value={'2023-08-10'}/></td>
-                  <td>William, Berke</td>
-                  <td><select>        
-                    <option value="1">Hyde Park</option>
-                    <option value="2">Lafarge Park</option>
-                  </select></td>
-                  <td><select>        
-                    <option value="on">On-Going</option>
-                    <option value="canceled">Canceled</option>
-                  </select></td>
-                </tr>
-                <tr>
-                  <td><input type='date' value={'2023-08-10'}/></td>
-                  <td>William, Berke</td>
-                  <td><select>        
-                    <option value="1">Hyde Park</option>
-                    <option value="2">Lafarge Park</option>
-                  </select></td>
-                  <td><select>        
-                    <option value="on">On-Going</option>
-                    <option value="canceled">Canceled</option>
-                  </select></td>
-                </tr> */}
               </tbody>
             </table>
           </div>

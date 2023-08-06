@@ -10,6 +10,7 @@ import Admin from "./pages/admin";
 import Payment from "./components/portal/payment";
 import Feedback from "./components/portal/feedback";
 import AddLesson from "./components/portal/addLesson";
+import Error404 from "./pages/404";
 
 function App() {
   const location = useLocation();
@@ -21,15 +22,12 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
-
-        <Route path='/portal' element={
-          <ProtectedRoute>
-            <Portal/>
-          </ProtectedRoute>
-        }/>
+        
+        <Route path='/portal' element={<ProtectedRoute><Portal/></ProtectedRoute>}/>
         <Route path='/admin' element={<ProtectedRoute><Admin/></ProtectedRoute>}/>
 
-        <Route path='/*' element={<Navigate to="/"/>}/>
+        <Route path="/404" element={<Error404/>}/>
+        <Route path='/*' element={<Navigate to="/404"/>}/>
       </Routes>
 
       {background && (

@@ -4,7 +4,6 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import '../../css/custom-calendar.css';
 import moment from 'moment';
 
-// Custom event component to render additional details on click
 const EventDetails = ({ event }) => (
   <div className="custom-event-wrapper">
     <div className="custom-event-wrapper">
@@ -31,9 +30,9 @@ const ClassCalendar = ({ events }) => {
         events={events}
         startAccessor="start"
         endAccessor="end"
-        views={['month']} // Show only the month view
+        views={['month']} 
         components={{
-          event: EventDetails, // Use the custom event component for rendering events
+          event: EventDetails,
         }}
       />
     </div>

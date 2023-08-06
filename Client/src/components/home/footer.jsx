@@ -15,7 +15,7 @@ function Footer() {
             <div className='footer-main'>
                 <div className='footer-container'>
                     <div className='footer-col-1'>
-                        <Link className='footer-title' to='home' activeClass="active" spy={true} smooth={true} offset={-65} duration={500}><span>JJTENNIS</span></Link>
+                        <Link className='footer-title' to='home' activeClass="active" spy={true} smooth={true} offset={-65} duration={500}><span>TENNIST</span></Link>
                     </div>
                     <div className='footer-col-2'>
                         <ul>

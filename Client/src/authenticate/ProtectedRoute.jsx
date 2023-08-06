@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import jwt_decode from 'jwt-decode'; // npm install jwt-decode
+import jwt_decode from 'jwt-decode';
 const cookies = new Cookies();
 
 const ProtectedRoute = ({ children }) => {

@@ -141,3 +141,33 @@
     width: 25ch;
     margin: 0;
 }
+
+.admin-user-header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-user-header a{
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+}
+
+.admin-user-btn{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-user-btn a{
+    max-height: fit-content !;
+    border-right: 1px solid black;
+    padding: 0 10px;
+}
+
+.admin-user-btn .logout{
+    border: none;
+}
