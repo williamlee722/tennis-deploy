@@ -1,0 +1,140 @@
+.footer{
+    width: 100%;
+    height: fit-content;
+    background-color: rgb(7, 66, 35);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-body{
+    border-bottom: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.footer-main{
+    width: 1140px;
+    margin: auto;
+}
+
+.footer-container{
+    padding: 20px 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer p{
+    margin: 0;
+}
+
+.footer a{
+    text-decoration: none;
+    color: #ffffffb3;
+}
+
+.footer a:hover{
+    color: #ffffff;
+}
+
+.footer-title{
+    font-size: 2.5em;
+    font-weight: 100;
+    cursor: pointer;
+}
+
+.footer-col-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-col-3{
+    display: flex;
+    align-items: center;
+    width: 180px;
+    justify-content: flex-end;
+}
+
+.footer-col-3 img{
+    width: 25px;
+    margin: 0 20px;
+    opacity: .6;
+}
+
+.footer-col-3 img:hover{
+    opacity: 1;
+}
+
+.footer ul{
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.footer ul li{
+    margin: 0 21px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.copyright{
+    text-align: center;
+    font-size: .8em;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 160px 0 10px 0 !important;
+}
+
+@media screen and (max-width: 992px) {
+    .footer-main{
+        width: 100%;
+    }
+
+    .footer-col-1{
+        display: none;
+    }
+
+    .copyright{
+        margin: 120px 0 30px 0 !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footer-main{
+        width: 100%;
+    }
+
+    .footer-body{
+        border-bottom: none;
+    }
+
+    .footer-col-1{
+        display: none;
+    }
+
+    .footer-container{
+        align-items: flex-start;
+        padding: 30px 10px;
+        margin: 0;
+    }
+
+    .footer-col-2{
+        justify-content: flex-start;
+    }
+
+    .footer ul{
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: start;
+    }
+
+    .footer ul li{
+        margin-bottom: 20px;
+        font-size: 1.5em;
+        font-weight: 300;
+    }
+
+    .copyright{
+        margin: 0 !important;
+        margin-bottom: 20px !important;
+    }
+}

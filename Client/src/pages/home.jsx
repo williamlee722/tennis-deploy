@@ -5,6 +5,7 @@ import Hero from '../components/home/hero'
 import About from '../components/home/about'
 import Lessons from '../components/home/lessons'
 import Contact from '../components/home/contact'
+import Footer from '../components/home/footer';
 
 function Home() {
   const [visible, setVisible] = useState(false)
@@ -35,6 +36,7 @@ function Home() {
       <About/>
       <Lessons/>
       <Contact/>
+      <Footer/>
     </div>
   )
 }
