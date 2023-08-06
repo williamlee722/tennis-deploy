@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import '../css/admin.css'
 import '../css/calendar.css'
 import Logo from '../images/logo'
@@ -15,6 +15,7 @@ function Admin() {
   const [bookingsList, setBookingsList] = useState([])
   const [userInfoList, setUserInfoList] = useState([])
   const [retVal, setRetVal] = useState({});
+  const navigate = useNavigate();
 
   const location = useLocation();
 
@@ -34,6 +35,8 @@ function Admin() {
       })
       .catch((error) => {
         error = new Error();
+        cookies.remove("Auth_TOKEN", { path: "/" });
+        navigate("/login");
       });
   }, []);
 

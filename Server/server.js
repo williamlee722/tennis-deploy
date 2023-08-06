@@ -199,17 +199,17 @@ app.post("/admin/getData", authenticateToken, (req, res) => {
             res.status(400).send({
                 message: "Not Admin!"
             });
+        }else{
+            UserInfos.find({}).then((userInfo)=>{
+                Bookings.find({}).then((bookings) => {
+                    res.send({
+                        userInfos: userInfo,
+                        bookings: bookings,
+                    });
+                })
+            })
         }
-    });
-
-    UserInfos.find({}).then((userInfo)=>{
-        Bookings.find({}).then((bookings) => {
-            res.send({
-                userInfos: userInfo,
-                bookings: bookings,
-            });
-        })
-    })
+    });    
 })
 
 app.listen(8000, () => {
