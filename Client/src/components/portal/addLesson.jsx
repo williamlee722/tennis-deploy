@@ -60,6 +60,9 @@ function AddLesson() {
           <input type="time" name="start" required onChange={(e) => setStartHour(e.target.value)} />
           <label name="end">Ends At:</label>
           <input type="time" name="end" required onChange={(e) => setEndHour(e.target.value)} />
+          <input className="date" type="time" name="start" required onChange={(e) => setStartHour(e.target.value)} />
+          <label name="end">Ends At:</label>
+          <input className="date" type="time" name="end" required onChange={(e) => setEndHour(e.target.value)} />
           <label name="level">Level:</label>
           <select required onChange={(e) => setLevel(e.target.value)} value={level}>
             <option selected value="beginner">Beginner</option>

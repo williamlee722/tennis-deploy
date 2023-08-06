@@ -10,6 +10,7 @@
 }
 
 .modal {
+  min-width: 50vw;
   padding: 100px 50px;
   background-color: rgb(247, 247, 247);
   border-radius: 20px;
@@ -56,6 +57,7 @@
   width: fit-content;
   border-radius: 1rem;
   padding: .5rem 2rem;
+  margin: 0 1rem;
   cursor: pointer;
   color: white;
   background-color: rgb(26, 129, 226);
@@ -66,6 +68,11 @@
 
 .modal button{
   background-color: rgb(192, 192, 192);
+}
+
+.modal form select{
+  font-size: 50px;
+  text-align: center;
 }
 
 .modal .button-container{
