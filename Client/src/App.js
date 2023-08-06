@@ -25,6 +25,7 @@ function App() {
         <Route path="/home" element={<Navigate to="/"/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
+        <Route path="/survey" element={<Survey/>}/>
         
         <Route path='/portal' element={<ProtectedRoute><Portal/></ProtectedRoute>}/>
         <Route path='/admin' element={<ProtectedRoute><Admin/></ProtectedRoute>}/>

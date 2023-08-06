@@ -63,8 +63,23 @@
     font-size: 1.5rem;
 }
 
+.home-info-contact a:hover{
+    text-decoration: underline;
+}
+
 .home-info-description{
     line-height: 1.5;
+}
+
+.home-info-desc2 a{
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-size: 1.4rem;
+}
+
+.home-info-desc2 a:hover{
+    text-decoration: underline;
 }
 
 @media screen and (max-width: 992px) {
