@@ -3,6 +3,7 @@
     min-height: 100vh;
     background-image: radial-gradient(ellipse at bottom, #f4cd7f, #ff9900);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -16,7 +17,6 @@
             'credit credit feedback feedback'
             'calendar calendar calendar calendar';
     gap: 10px;
-    padding: 2rem 0;
 }
 
 .portal-grid{

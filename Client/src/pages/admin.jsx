@@ -60,14 +60,14 @@ function Admin() {
 
   return (
     <div className='admin'>
+      <ul className='admin-user-btn'>
+        <li><Link href='/notifications'>Notifications</Link></li>
+        <li><a className='logout' href='/home' onClick={handleLogout}>Logout</a></li>
+      </ul>
       <div className='admin-container'>
         <div className='admin-grid admin-user'>
           <div className='admin-user-header'>
             <div className='admin-logo'><a href='/'><Logo /></a></div>
-            <ul className='admin-user-btn'>
-              <li><Link href='/notifications'>Notifications</Link></li>
-              <li><a className='logout' href='/home' onClick={handleLogout}>Logout</a></li>
-            </ul>
           </div>
           <p>Welcome Coach Richard</p>
         </div>

@@ -11,7 +11,6 @@ const server_url = process.env.REACT_APP_SERVER_BASE_URL;
 
 function Portal() {
 
-
   const [retVal, setRetVal] = useState("");
   const [username, setUsername] = useState("");
   const [level, setLevel] = useState("");
@@ -85,10 +84,15 @@ function Portal() {
     setEvents(eventsList);
   }, [retVal]);
 
-
+  const handleLogout = () => {
+    cookies.remove("Auth_TOKEN", { path: "/" });
+  };
 
   return (
     <div className='portal'>
+      <ul className='admin-user-btn'>
+        <li><a className='logout' href='/home' onClick={handleLogout}>Logout</a></li>
+      </ul>
       <div className='portal-container'>
         <div className='portal-grid portal-user'>
           <div className='portal-logo'><a href='/'><Logo /></a></div>

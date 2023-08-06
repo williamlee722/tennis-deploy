@@ -11,6 +11,8 @@ import Payment from "./components/portal/payment";
 import Feedback from "./components/portal/feedback";
 import AddLesson from "./components/portal/addLesson";
 import Error404 from "./pages/404";
+import Notifications from "./components/portal/notifications";
+import Details from "./components/portal/details";
 
 function App() {
   const location = useLocation();
@@ -20,6 +22,7 @@ function App() {
     <div>
       <Routes location={background || location}>
         <Route path="/" element={<Home/>}/>
+        <Route path="/home" element={<Navigate to="/"/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         
@@ -34,7 +37,9 @@ function App() {
         <Routes>
           <Route path="/payment" element={<Payment />} />
           <Route path="/feedback" element={<Feedback />} />
+          <Route path="/details" element={<Details />} />
           <Route path="/addlesson" element={<AddLesson />} />
+          <Route path="/notifications" element={<Notifications />} />
         </Routes>
       )}
     </div>
