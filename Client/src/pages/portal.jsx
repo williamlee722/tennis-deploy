@@ -117,16 +117,16 @@ function Portal() {
         <div className='portal-grid portal-feedback'>
           <p className='portal-grid-title'>Feedback</p>
           {feedbacksArr.map((feed, index) => (
-            <p className='portal-grid-feedback' key={index}>
+            <div className='portal-grid-feedback' key={index}>
               <table>
                 <tr>
                   <td>{feed.date}</td>
                   <td>{feed.text}</td>
                 </tr>
               </table>
-            </p>
+              <Link to="/feedback" state={{ background: location }}>View More</Link>
+            </div>
           ))}
-          <Link to="/feedback" state={{ background: location }}>View More</Link>
         </div>
         <div className='portal-grid portal-calender'>
           <p className='portal-grid-title'>Lessons</p>
