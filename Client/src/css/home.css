@@ -39,6 +39,7 @@
 .home-info-desc{
     grid-area: desc;
     align-self: center;
+    padding: 10px;
 }
 
 .home-info-img2{

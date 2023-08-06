@@ -12,7 +12,7 @@ function Lessons() {
                 <img className='home-info-grid home-info-img' src={private1} alt='private lesson'/>
                 <p className='home-info-grid home-info-desc'><span>Private lessons are given to members on a reservation bases. Members will have access to the reservation system once the member have been verified by the coach.</span></p>
                 <img className='home-info-grid home-info-img2' src={private2} alt='private lesson'/>
-                <p className='home-info-grid home-info-desc2'><span>Private lessons include lessons to children and adults from intermediate level to expert level.</span></p>
+                <p className='home-info-grid home-info-desc2'><span>Want to know your level?<br/>Take a short survey and find out!.</span><br/><a href='/survey'>Survey!</a></p>
             </div>
         </div>
     </div>
