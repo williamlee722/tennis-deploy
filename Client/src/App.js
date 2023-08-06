@@ -13,6 +13,7 @@ import AddLesson from "./components/portal/addLesson";
 import Error404 from "./pages/404";
 import Notifications from "./components/portal/notifications";
 import Details from "./components/portal/details";
+import AddFeedback from "./components/portal/addFeedback";
 
 function App() {
   const location = useLocation();
@@ -40,6 +41,7 @@ function App() {
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/details" element={<Details />} />
           <Route path="/addlesson" element={<ProtectedRoute><AddLesson /></ProtectedRoute>} />
+          <Route path="/addfeedback" element={<ProtectedRoute><AddFeedback /></ProtectedRoute>} />
           <Route path="/notifications" element={<Notifications />} />
         </Routes>
       )}

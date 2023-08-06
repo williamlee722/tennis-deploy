@@ -61,7 +61,7 @@ function Admin() {
   return (
     <div className='admin'>
       <ul className='admin-user-btn'>
-        <li><Link href='/notifications'>Notifications</Link></li>
+        <li><Link to="/notifications" state={{ background: location }}>Notifications</Link></li>
         <li><a className='logout' href='/home' onClick={handleLogout}>Logout</a></li>
       </ul>
       <div className='admin-container'>
@@ -125,7 +125,7 @@ function Admin() {
                   bookingsList?.length > 0 && bookingsList.map((booking, index) => (
                     <tr key={index}>
                       <td className='date-tr'><input type='date' value={new Date(booking.day).toISOString().split('T')[0]}/></td>
-                      <td>{booking.students.map((student) => student.username).join(', ')}</td>
+                      <td className='addfeedback'><Link to="/addfeedback" state={{ background: location }}>{booking.students.map((student) => student.username).join(', ')}</Link></td>
                       <td>{booking.level.charAt(0).toUpperCase() + booking.level.slice(1)}</td>
                       <td><select value={booking.location}>
                       {courtList.map((court) => (

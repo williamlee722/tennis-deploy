@@ -42,13 +42,13 @@
   justify-content: space-evenly;
 }
 
-.modal form input, .modal form label{
+.modal form input, .modal form label, .modal form textarea{
   font-size: 1.2rem;
   margin-bottom: 1rem;
   text-align: center;
 }
 
-.modal form input{
+.modal form input, .modal form textarea{
   margin-bottom: 2rem;
 }
 

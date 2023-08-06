@@ -176,3 +176,14 @@
 .admin-user-btn .logout{
     border: none;
 }
+
+.addfeedback a{
+    background-color: transparent;
+    color: black;
+}
+
+.addfeedback a:hover{
+    text-decoration: underline;
+    background-color: transparent;
+    color: black;
+}
