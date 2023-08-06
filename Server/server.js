@@ -283,13 +283,15 @@ app.post("/admin/updateLecture", authenticateToken, (req, res) => {
                     message: "Not Admin!"
                 });
             } else {
-                Bookings.updateOne({ _id: req.data.id }, {
-                    $set: { day: req.data.day, level: req.data.level, location: req.data.location, status: req.data.status }
+                // Bookings.find({_id: req.body.bookingObject._id}).then((result) => console.log(result))
+
+                Bookings.updateOne({ _id: req.body.bookingObject._id }, {
+                    $set: { day: req.body.bookingObject.day, location: req.body.bookingObject.location, status: req.body.bookingObject.status }
                 }).then((result) => {
+                    Bookings.find({}).sort({day: 1}).then((bookings) => {
                     res.send({
-                        message: "Lecture updated Successfully",
-                        result,
-                    });
+                        bookings: bookings
+                    });})
                 })
             }
         });

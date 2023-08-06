@@ -45,17 +45,56 @@ function Admin() {
       setBookingsList(retVal.bookings)
       setUserInfoList(retVal.userInfos)
       // console.log(bookingsList)
-      if(bookingsList){
-        bookingsList.forEach(element => {
-          console.log(element._id)
-        });
-      }      
+      // if(bookingsList){
+      //   bookingsList.forEach(element => {
+      //     console.log(element._id)
+      //   });
+      // }      
     }    
   },[retVal])
 
   const handleLogout = () => {
     cookies.remove("Auth_TOKEN", { path: "/" });
   };
+
+  const handleBookingChange = (index, event) => {
+    const { name, value } = event.target;
+    const bookingObject = bookingsList[index]
+
+    switch (name) {
+      case 'day':        
+        bookingObject.day = value
+        break;
+      case 'location':
+        bookingObject.location = value
+        break;
+      case 'status':
+        bookingObject.status = value
+        break;
+    
+    }
+
+    const configuration = {
+      method: 'post',
+      url: server_url + '/admin/updateLecture',
+      headers: {
+        Authorization: `Bearer ${cookies.get("Auth_TOKEN")}`,
+      },
+      data: {
+        bookingObject: bookingObject
+      }
+    };
+
+    axios(configuration)
+      .then((result) => {
+        setBookingsList(result.data.bookings);
+      })
+      .catch((error) => {
+        error = new Error();
+        cookies.remove("Auth_TOKEN", { path: "/" });
+        navigate("/login");
+      });
+  }
 
 
   return (
@@ -124,17 +163,17 @@ function Admin() {
                 {
                   bookingsList?.length > 0 && bookingsList.map((booking, index) => (
                     <tr key={index}>
-                      <td className='date-tr'><input type='date' value={new Date(booking.day).toISOString().split('T')[0]}/></td>
+                      <td className='date-tr'><input type='date' name= 'day' value={new Date(booking.day).toISOString().split('T')[0]}  onChange={(event) => handleBookingChange(index, event)}/></td>
                       <td className='addfeedback'><Link to="/addfeedback" state={{ background: location }}>{booking.students.map((student) => student.username).join(', ')}</Link></td>
                       <td>{booking.level.charAt(0).toUpperCase() + booking.level.slice(1)}</td>
-                      <td><select value={booking.location}>
+                      <td><select value={booking.location} name='location'  onChange={(event) => handleBookingChange(index, event)}>
                       {courtList.map((court) => (
                         <option key={court.value} value={court.value}>
                           {court.label}
                         </option>
                       ))}
                       </select></td>
-                      <td><select value={booking.status}>        
+                      <td><select value={booking.status} name='status'  onChange={(event) => handleBookingChange(index, event)}>        
                         <option value="Open">On-Going Not Full</option>
                         <option value="Full">On-Going Full</option>
                         <option value="Canceled">Canceled</option>
