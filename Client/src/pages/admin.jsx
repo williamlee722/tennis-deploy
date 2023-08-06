@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { Link, Outlet, useLocation } from "react-router-dom";
 import '../css/admin.css'
 import '../css/calendar.css'
 import Logo from '../images/logo'
-import ClassCalendar from '../components/portal/classCalendar'
 import Cookies from "universal-cookie";
 import axios from "axios";
 const cookies = new Cookies();
@@ -15,6 +15,8 @@ function Admin() {
   const [bookingsList, setBookingsList] = useState([])
   const [userInfoList, setUserInfoList] = useState([])
   const [retVal, setRetVal] = useState({});
+
+  const location = useLocation();
 
   // Get data from server UserInfo + Bookings
   useEffect(() => {
@@ -168,7 +170,7 @@ function Admin() {
               </tbody>
             </table>
           </div>
-          <a href='/'>Add</a>
+          <Link to="/editlesson" state={{ background: location }}>Add</Link>
         </div>
       </div>
     </div>

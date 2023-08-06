@@ -1,23 +1,44 @@
 .calendar{
     box-sizing: border-box;
+    max-width: 1040px;
     width: 70vw;
-    min-height: 80vh;
+    height: 50vh;
     margin: auto;
-}
-
-.rbc-toolbar{
-    width: 30%;
-}
-
-.rbc-btn-group{
-    width: 20px;
+    margin-top: 15px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .rbc-btn-group button{
-    width: 150px;
+    width: 100px;
+    font-size: .8rem;
+    font-weight: 500;
+}
+
+.rbc-toolbar-label{
+    font-size: 1.2rem;
+    font-weight: 700;
 }
 
 .rbc-button-link  { 
     /* This was originally 50 on css library */
     width: 5ch !important; /* Change the width to 5ch */
+    float: left;
+}
+
+.rbc-off-range{
+    color: transparent;
+}
+
+.rbc-current button{
+    color: blue;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 992px) {
+    .rbc-header span{
+        font-size: 1.2rem;
+    }
 }

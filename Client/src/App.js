@@ -8,6 +8,8 @@ import Portal from "./pages/portal";
 import ProtectedRoute from "./authenticate/ProtectedRoute";
 import Admin from "./pages/admin";
 import Payment from "./components/portal/payment";
+import Feedback from "./components/portal/feedback";
+import EditLesson from "./components/portal/editLesson";
 
 function App() {
   const location = useLocation();
@@ -33,8 +35,8 @@ function App() {
       {background && (
         <Routes>
           <Route path="/payment" element={<Payment />} />
-          <Route path="/feedback" element={<Payment />} />
-          <Route path="/payment" element={<Payment />} />
+          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/editlesson" element={<EditLesson />} />
         </Routes>
       )}
     </div>

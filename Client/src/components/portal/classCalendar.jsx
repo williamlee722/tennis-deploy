@@ -32,7 +32,6 @@ const ClassCalendar = ({ events }) => {
         startAccessor="start"
         endAccessor="end"
         views={['month']} // Show only the month view
-        toolbar={false}
         components={{
           event: EventDetails, // Use the custom event component for rendering events
         }}

@@ -73,3 +73,25 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+.modal .confirm{
+  background-color: rgb(26, 129, 226);
+  margin-top: 30px;
+}
+
+.modal table{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-collapse: collapse;
+}
+
+.modal td, .modal th{
+  width: 55ch;
+  padding: 10px 0;
+  align-self: center;
+  border: 1px solid black;
+  border-collapse: collapse;
+}

@@ -48,21 +48,18 @@ function Portal() {
     let feedArr = []
 
     if (retVal.feedbacks?.length > 0) {
-      retVal.feedbacks.forEach((feedback) => {
-        const dateString = feedback.dateOfFeed;
+      const dateString = retVal.feedbacks[0].dateOfFeed;
 
-        const date = new Date(dateString);
+      const date = new Date(dateString);
 
-        const options = {
-          month: 'long',
-          day: '2-digit',
-        };
+      const options = {
+        month: 'long',
+        day: '2-digit',
+      };
 
-        const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
+      const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
 
-        feedArr.push({ date: formattedDate, text: feedback.feedback });
-
-      });
+      feedArr.push({ date: formattedDate, text: retVal.feedbacks[0].feedback });
     }
     setFeedbacksArr(feedArr);
 
@@ -107,10 +104,15 @@ function Portal() {
           <p className='portal-grid-title'>Feedback</p>
           {feedbacksArr.map((feed, index) => (
             <p className='portal-grid-feedback' key={index}>
-              <span>{feed.date}</span>: <span>{feed.text}</span>
+              <table>
+                <tr>
+                  <td>{feed.date}</td>
+                  <td>{feed.text}</td>
+                </tr>
+              </table>
             </p>
           ))}
-          <Link to="/modal" state={{ background: location }}>View More</Link>
+          <Link to="/feedback" state={{ background: location }}>View More</Link>
         </div>
         <div className='portal-grid portal-calender'>
           <p className='portal-grid-title'>Lessons</p>
