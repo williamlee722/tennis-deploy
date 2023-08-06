@@ -58,7 +58,7 @@ function Navbar() {
         </div>
         <div className={`nav-area ${style_nav}`}>
           <ul className='main'>
-            <li><Link to='about' activeClass="active" spy={true} smooth={true} offset={-165} duration={500} onClick={setClose}>About Us</Link></li>
+            <li><Link to='about' activeClass="active" spy={true} smooth={true} offset={-158} duration={500} onClick={setClose}>About Us</Link></li>
             <li><Link to='lessons' activeClass="active" spy={true} smooth={true} offset={-65} duration={500} onClick={setClose}>Lessons</Link></li>
             <li><Link to='contact' activeClass="active" spy={true} smooth={true} offset={-50} duration={500} onClick={setClose}>Contact</Link></li>
           </ul>
