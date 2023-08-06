@@ -68,17 +68,25 @@ function Portal() {
 
     if (retVal.eventdb?.length > 0) {
       retVal.eventdb.forEach((event) => {
-        console.log(event)
+
+        let eventStartDate = new Date(event.day)
+        let eventEndDate = new Date(event.day)
+        const [startHour, startMinutes] = event.start.split(':');
+        const [endHour, endMinutes] = event.end.split(':');
+        eventStartDate.setHours(Number(startHour), Number(startMinutes));
+        eventEndDate.setHours(Number(endHour), Number(endMinutes));
+      
         eventsList.push({
           title: event.level,
           day: event.day,
-          start: event.start,
-          end: event.end,
+          start: eventStartDate,
+          end: eventEndDate,
           status: event.status,
           location: event.location,
           description: event.description
         })
       });
+      console.log(eventsList)      
     }
 
     setEvents(eventsList);

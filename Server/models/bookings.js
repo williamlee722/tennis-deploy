@@ -1,13 +1,18 @@
 const mongoose = require("mongoose");
 const bookingSchema = new mongoose.Schema({
+    id:{
+        type: Number,
+        unique: true,
+        require: true,
+    },
     day: {
         type: Date // Year - Month - Day only
     },
     start: {
-        type: Date // hour:minute only
+        type: String // hour:minute only
     },
     end: {
-        type: Date // hour:minute only
+        type: String // hour:minute only
     },
     level: {
         type: String

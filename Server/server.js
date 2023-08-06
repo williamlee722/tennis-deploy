@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const User = require("./models/users.js");
 const Bookings = require("./models/bookings.js")
 const UserInfos = require("./models/userInfo.js")
+const Notifications = require("./models/notifications.js")
 const cors = require("cors");
 const bodyParser = require("body-parser")
 const bcrypt = require("bcrypt");
@@ -136,8 +137,6 @@ app.post("/register", (req, res) => {
                 ]
             })
 
-
-
             console.log(user.first_name, user.last_name, user.username, user.email, user.password);
             // save the new user
             user
@@ -176,7 +175,7 @@ app.post("/portal", authenticateToken, (req, res) => {
                             level: studentLevel,
                             credits: userInfo.credits,
                             feedbacks: userInfo.feedbacks,
-            
+
                             eventdb: classList
                         });
                     })
@@ -191,18 +190,42 @@ app.post("/portal", authenticateToken, (req, res) => {
                     //     feedbacks: userInfo.feedbacks
                     // });   
                 })
-            }else{
+            } else {
                 res.status(400).send({
                     message: "Something went wrong please login again!"
                 });
             }
-        })       
+        })
     } catch (error) {
         res.status(400).send({
             message: "Something went wrong please login again!"
         });
     }
-    
+})
+
+// Notify credit
+app.post("/portal/notifyCredit", authenticateToken, (req, res) => {
+    const username = req.user.username
+    const date = new Date()
+    const creditAmount = req.data.creditAmount
+
+    const notification = new Notifications({
+        byUser: username,
+        day: date,
+        creditAmount: creditAmount
+    })
+
+    notification.save().then((result) => {
+        res.send({
+            message: "Notification Created Successfully",
+            result,
+        });
+    }).catch((e) => {
+        console.log(e.message);
+        res.status(400).send({
+            message: "Notification creation not successful",
+        });
+    });
 })
 
 // Admin data
@@ -211,26 +234,134 @@ app.post("/admin/getData", authenticateToken, (req, res) => {
     try {
         const username = req.user.username
         User.findOne({ username: username }).then((userInfo) => {
-            if(!userInfo.isAdmin){
+            if (!userInfo.isAdmin) {
                 res.status(400).send({
                     message: "Not Admin!"
                 });
-            }else{
-                UserInfos.find({}).then((userInfo)=>{
+            } else {
+                UserInfos.find({}).then((userInfo) => {
                     Bookings.find({}).then((bookings) => {
-                        res.send({
-                            userInfos: userInfo,
-                            bookings: bookings,
-                        });
+                        Notifications.find({}).then((notifications) => {
+                            res.send({
+                                userInfos: userInfo,
+                                bookings: bookings,
+                                notifications: notifications
+                            });
+                        })
                     })
                 })
             }
-        });  
+        });
     } catch (error) {
         res.status(400).send({
             message: "Not Admin!"
         });
-    }      
+    }
+})
+
+// Admin user update
+app.post("/admin/updateUser", authenticateToken, (req, res) => {
+    // Check if admin first
+    try {
+        const username = req.user.username
+        User.findOne({ username: username }).then((userInfo) => {
+            if (!userInfo.isAdmin) {
+                res.status(400).send({
+                    message: "Not Admin!"
+                });
+            } else {
+                UserInfos.find({ username: req.data.username }).then((userInfo) => {
+                    feedString = req.data.username + " paid for " + req.data.credit + "."
+                    feedbackObj = {
+                        dateOfFeed: new Date(),
+                        feedback: feedString
+                    }
+                    feedbackList = userInfo.feedbacks
+                    feedbackList.append(feedbackObj)
+                }).then(() => {
+                    UserInfos.updateOne({ username: req.data.username }, {
+                        $set: { level: req.data.level, credits: req.data.credit, feedbacks: feedbackList }
+                    }).then((result) => {
+                        res.send({
+                            message: "User updated Successfully",
+                            result,
+                        });
+                    })
+                })
+            }
+        });
+    } catch (error) {
+        res.status(400).send({
+            message: "Not Admin!"
+        });
+    }
+})
+
+// Admin lecture update
+app.post("/admin/updateLecture", authenticateToken, (req, res) => {
+    // Check if admin first
+    try {
+        const username = req.user.username
+        User.findOne({ username: username }).then((userInfo) => {
+            if (!userInfo.isAdmin) {
+                res.status(400).send({
+                    message: "Not Admin!"
+                });
+            } else {
+                Bookings.updateOne({ id: req.data.id }, {
+                    $set: { day: req.data.day, level: req.data.level, location: req.data.location, status: req.data.status}
+                }).then((result) => {
+                    res.send({
+                        message: "Lecture updated Successfully",
+                        result,
+                    });
+                })     
+            }
+        });
+    } catch (error) {
+        res.status(400).send({
+            message: "Not Admin!"
+        });
+    }
+})
+
+// Admin lecture create
+app.post("/admin/createLecture", authenticateToken, (req, res) => {
+    // Check if admin first
+    try {
+        const username = req.user.username
+        User.findOne({ username: username }).then((userInfo) => {
+            if (!userInfo.isAdmin) {
+                res.status(400).send({
+                    message: "Not Admin!"
+                });
+            } else {
+                Bookings.findOne().sort({ id: -1 }).exec((err, booking) => {
+                    if (err) {
+                        newId = 1
+                    } else if (booking) {
+                        newId = booking.id + 1
+                    } else {
+                        newId = 1
+                    }
+                }).then(() => {
+                    const booking = new Bookings({
+                        id: newId,
+                        day: req.data.eventDay,
+                        start: req.data.eventStart,
+                        end: req.data.eventEnd,
+                        level: req.data.eventLevel,
+                        location: req.data.eventLocation,
+                        students: []
+                    })
+                })
+            }
+        });
+    } catch (error) {
+        res.status(400).send({
+            message: "Not Admin!"
+        });
+    }
 })
 
 app.listen(8000, () => {

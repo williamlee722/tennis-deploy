@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const userInfoSchema = new mongoose.Schema({
     username: {
         type: String,
+        unique: true,
     },
     level: {
         type: String, // beginner, intermediate, advance
