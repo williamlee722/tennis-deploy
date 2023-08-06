@@ -215,7 +215,7 @@ app.post("/admin/getData", authenticateToken, (req, res) => {
                 });
             } else {
                 UserInfos.find({}).then((userInfo) => {
-                    Bookings.find({}).then((bookings) => {
+                    Bookings.find({}).sort({day: 1}).then((bookings) => {
                         Notifications.find({}).then((notifications) => {
                             res.send({
                                 userInfos: userInfo,
@@ -283,7 +283,7 @@ app.post("/admin/updateLecture", authenticateToken, (req, res) => {
                     message: "Not Admin!"
                 });
             } else {
-                Bookings.updateOne({ id: req.data.id }, {
+                Bookings.updateOne({ _id: req.data.id }, {
                     $set: { day: req.data.day, level: req.data.level, location: req.data.location, status: req.data.status }
                 }).then((result) => {
                     res.send({

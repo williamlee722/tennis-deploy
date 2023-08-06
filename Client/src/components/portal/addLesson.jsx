@@ -15,14 +15,14 @@ function AddLesson() {
   const [date, setDate] = useState("")
   const [startHour, setStartHour] = useState("")
   const [endHour, setEndHour] = useState("")
-  const [level, setLevel] = useState("")
+  const [level, setLevel] = useState("beginner")
   const [err, setErr] = useState(false);
   const [errMes, setErrMes] = useState('');
 
   // On submit
   const handleSubmit = (e) => {
     console.log("submit clicked")
-
+ 
     e.preventDefault();
     const configuration = {
       method: "post",
@@ -33,8 +33,8 @@ function AddLesson() {
       data: {
         eventLocation: location,
         eventDay: date,
-        eventStart: startHour,
-        eventEnd: endHour,
+        eventStart: startHour.toLocaleString('en-CA', { hour: '2-digit', minute: '2-digit', hour12: false }),
+        eventEnd: endHour.toLocaleString('en-CA', { hour: '2-digit', minute: '2-digit', hour12: false }),
         eventLevel: level
       }
     }
@@ -42,6 +42,7 @@ function AddLesson() {
     axios(configuration)
       .then((result) => {
         navigate('/admin')
+        window.location.reload();
       }).catch((e) => {
         setErr(true);
         setErrMes(e.response.data.message)
@@ -56,12 +57,12 @@ function AddLesson() {
           <label name="date">Date:</label>
           <input className="date" type="date" required name="date" onChange={(e) => setDate(e.target.value)} />
           <label name="start">Starts At:</label>
-          <input type="text" name="start" required onChange={(e) => setStartHour(e.target.value)} />
+          <input type="time" name="start" required onChange={(e) => setStartHour(e.target.value)} />
           <label name="end">Ends At:</label>
-          <input type="text" name="end" required onChange={(e) => setEndHour(e.target.value)} />
+          <input type="time" name="end" required onChange={(e) => setEndHour(e.target.value)} />
           <label name="level">Level:</label>
           <select required onChange={(e) => setLevel(e.target.value)} value={level}>
-            <option value="beginner">Beginner</option>
+            <option selected value="beginner">Beginner</option>
             <option value="intermediate">Intermediate</option>
             <option value="advanced">Advanced</option>
           </select>

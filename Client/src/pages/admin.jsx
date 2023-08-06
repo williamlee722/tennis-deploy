@@ -11,7 +11,7 @@ const server_url = process.env.REACT_APP_SERVER_BASE_URL;
 function Admin() {
 
   const courtList = [{value: "Hyde Park", label: 'Hyde Park'}, {value: "Lafarge Park", label: 'Lafarge Park'}]
-  const levels = [{value: "beginner", label: 'Beginner'}, {value: 'intermediate', label: 'Intermediate'}, {value: 'advance', label: 'Advance'}]
+  const levels = [{key: "beginner", value: 'Beginner'}, {key: 'intermediate', value: 'Intermediate'}, {key: 'advance', value: 'Advance'}]
   const [bookingsList, setBookingsList] = useState([])
   const [userInfoList, setUserInfoList] = useState([])
   const [retVal, setRetVal] = useState({});
@@ -116,6 +116,7 @@ function Admin() {
                 <tr>
                   <th>DATE</th>
                   <th>MEMBERS</th>
+                  <th>LEVEL</th>
                   <th>LOCATION</th>
                   <th>STATUS</th>
                 </tr>
@@ -125,6 +126,7 @@ function Admin() {
                     <tr key={index}>
                       <td className='date-tr'><input type='date' value={new Date(booking.day).toISOString().split('T')[0]}/></td>
                       <td>{booking.students.map((student) => student.username).join(', ')}</td>
+                      <td>{booking.level.charAt(0).toUpperCase() + booking.level.slice(1)}</td>
                       <td><select value={booking.location}>
                       {courtList.map((court) => (
                         <option key={court.value} value={court.value}>
