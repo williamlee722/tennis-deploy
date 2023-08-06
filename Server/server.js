@@ -166,7 +166,7 @@ app.post("/portal", authenticateToken, (req, res) => {
 
     try {
         User.findOne({ username: username }).then((userInfo) => {
-            if(!userInfo.isAdmin){
+            if (!userInfo.isAdmin) {
                 UserInfos.findOne({ username: username }).then((userInfo) => {
                     const studentLevel = userInfo.level
                     Bookings.find({ level: studentLevel }).then((classList) => {
@@ -201,31 +201,6 @@ app.post("/portal", authenticateToken, (req, res) => {
             message: "Something went wrong please login again!"
         });
     }
-})
-
-// Notify credit
-app.post("/portal/notifyCredit", authenticateToken, (req, res) => {
-    const username = req.user.username
-    const date = new Date()
-    const creditAmount = req.data.creditAmount
-
-    const notification = new Notifications({
-        byUser: username,
-        day: date,
-        creditAmount: creditAmount
-    })
-
-    notification.save().then((result) => {
-        res.send({
-            message: "Notification Created Successfully",
-            result,
-        });
-    }).catch((e) => {
-        console.log(e.message);
-        res.status(400).send({
-            message: "Notification creation not successful",
-        });
-    });
 })
 
 // Admin data
@@ -309,13 +284,13 @@ app.post("/admin/updateLecture", authenticateToken, (req, res) => {
                 });
             } else {
                 Bookings.updateOne({ id: req.data.id }, {
-                    $set: { day: req.data.day, level: req.data.level, location: req.data.location, status: req.data.status}
+                    $set: { day: req.data.day, level: req.data.level, location: req.data.location, status: req.data.status }
                 }).then((result) => {
                     res.send({
                         message: "Lecture updated Successfully",
                         result,
                     });
-                })     
+                })
             }
         });
     } catch (error) {
@@ -362,6 +337,67 @@ app.post("/admin/createLecture", authenticateToken, (req, res) => {
             message: "Not Admin!"
         });
     }
+})
+
+// Payment get zelleID
+app.post("/payment/getData", authenticateToken, (req, res) => {
+    try {
+        const username = req.user.username
+        UserInfos.findOne({ username: username }).then((userInfo) => {
+            if (userInfo.preferedZelleID) {
+                res.send({
+                    preferedZelleID: userInfo.preferedZelleID,
+                });
+            } else {
+                User.findOne({ username: username }).then((user) => {
+                    UserInfos.updateOne(
+                        { username: username },
+                        { $set: { preferedZelleID: user.email } }
+                    ).then(() => {
+                        res.send({
+                            preferedZelleID: user.email,
+                        });
+                    });
+                });
+            }
+        }).catch((e) => {
+            console.log(e.message);
+            res.status(400).send({
+                message: "User doesnt exist!",
+            });
+        })
+    } catch (error) {
+        res.status(400).send({
+            message: "Error occured!"
+        });
+    }
+})
+
+
+// Notify credit
+app.post("/payment/notifyCredit", authenticateToken, (req, res) => {
+    const username = req.user.username
+    const date = new Date()
+    const creditAmount = req.body.creditAmount
+    const preferedZelleID = req.body.preferedZelleID
+
+    const notification = new Notifications({
+        byUser: username,
+        day: date,
+        creditAmount: creditAmount
+    })
+
+    notification.save().then((result) => {
+        res.send({
+            message: "Notification Created Successfully",
+            result,
+        });
+    }).catch((e) => {
+        console.log(e.message);
+        res.status(400).send({
+            message: "Notification creation not successful",
+        });
+    });
 })
 
 app.listen(8000, () => {

@@ -35,7 +35,7 @@ function App() {
 
       {background && (
         <Routes>
-          <Route path="/payment" element={<Payment />} />
+          <Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/details" element={<Details />} />
           <Route path="/addlesson" element={<AddLesson />} />

@@ -17,6 +17,9 @@ const userInfoSchema = new mongoose.Schema({
                 feedback: String
             }
         ]
+    },
+    preferedZelleID: {
+        type: String,
     }
 })
 
