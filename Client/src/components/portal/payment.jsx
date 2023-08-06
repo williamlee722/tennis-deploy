@@ -77,7 +77,7 @@ function Payment() {
           <label name="zelleid">Zelle ID:</label>
           <input type="email" name="zelleid" value={zelleId} onChange={handleZelleIdChange}/>
           <label name="credit">1 Credit (USD $4):</label>
-          <input type="number" name="credit" min="1" max="100" placeholder="Amount sent using Zelle" onChange={handleCreditChange}/>
+          <input type="number" name="credit" min="1" max="100" placeholder="Amount sent using Zelle" value={credits} onChange={handleCreditChange}/>
           {err && (<p className="text-danger">{errMes}</p>)}
           <p style={{textAlign: "center"}}>Total of <span style={{fontSize: "1.2rem", fontWeight: 700}}>${credits * 4}</span><br/>should be deposited to tennist@gmail.com</p>
           <div className="button-container">
