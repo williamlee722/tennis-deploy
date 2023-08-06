@@ -44,10 +44,10 @@ function Admin() {
     if(retVal){
       setBookingsList(retVal.bookings)
       setUserInfoList(retVal.userInfos)
-      console.log(bookingsList)
+      // console.log(bookingsList)
       if(bookingsList){
         bookingsList.forEach(element => {
-          console.log(element.location)
+          console.log(element._id)
         });
       }      
     }    

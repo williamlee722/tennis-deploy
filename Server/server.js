@@ -310,25 +310,21 @@ app.post("/admin/createLecture", authenticateToken, (req, res) => {
                 res.status(400).send({
                     message: "Not Admin!"
                 });
-            } else {
-                Bookings.findOne().sort({ id: -1 }).exec((err, booking) => {
-                    if (err) {
-                        newId = 1
-                    } else if (booking) {
-                        newId = booking.id + 1
-                    } else {
-                        newId = 1
-                    }
-                }).then(() => {
+            } else {                
                     const booking = new Bookings({
-                        id: newId,
-                        day: req.data.eventDay,
-                        start: req.data.eventStart,
-                        end: req.data.eventEnd,
-                        level: req.data.eventLevel,
-                        location: req.data.eventLocation,
+                        day: req.body.eventDay,
+                        start: req.body.eventStart,
+                        end: req.body.eventEnd,
+                        level: req.body.eventLevel,
+                        location: req.body.eventLocation,
                         students: []
                     })
+
+                    booking.save().then((result) => {
+                        res.send({
+                            message: "Lecture added Successfully",
+                            result,
+                        });
                 })
             }
         });

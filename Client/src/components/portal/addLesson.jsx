@@ -1,30 +1,87 @@
 import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
 import '../../css/modal.css'
+import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+const server_url = process.env.REACT_APP_SERVER_BASE_URL;
 
 function AddLesson() {
 
+  const courtList = [{ value: "Hyde Park", label: 'Hyde Park' }, { value: "Lafarge Park", label: 'Lafarge Park' }]
+  const levels = [{ value: "beginner", label: 'Beginner' }, { value: 'intermediate', label: 'Intermediate' }, { value: 'advance', label: 'Advance' }]
   const navigate = useNavigate();
+  const [location, setLocation] = useState("");
+  const [date, setDate] = useState("")
+  const [startHour, setStartHour] = useState("")
+  const [endHour, setEndHour] = useState("")
+  const [level, setLevel] = useState("")
+  const [err, setErr] = useState(false);
+  const [errMes, setErrMes] = useState('');
+
+  // On submit
+  const handleSubmit = (e) => {
+    console.log("submit clicked")
+
+    e.preventDefault();
+    const configuration = {
+      method: "post",
+      url: server_url + "/admin/createLecture",
+      headers: {
+        Authorization: `Bearer ${cookies.get("Auth_TOKEN")}`,
+      },
+      data: {
+        eventLocation: location,
+        eventDay: date,
+        eventStart: startHour,
+        eventEnd: endHour,
+        eventLevel: level
+      }
+    }
+
+    axios(configuration)
+      .then((result) => {
+        navigate('/admin')
+      }).catch((e) => {
+        setErr(true);
+        setErrMes(e.response.data.message)
+      });
+  }
 
   return (
     <div className="modalDiv">
       <div className="modal">
         <p className="modal-title">Add Lesson</p>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label name="date">Date:</label>
-          <input className="date" type="date" name="date"/>
-          <label name="location">Location:</label>
-          <select name="location">        
-            <option value="1">Hyde Park</option>
-            <option value="2">Lafarge Park</option>
+          <input className="date" type="date" required name="date" onChange={(e) => setDate(e.target.value)} />
+          <label name="start">Starts At:</label>
+          <input type="text" name="start" required onChange={(e) => setStartHour(e.target.value)} />
+          <label name="end">Ends At:</label>
+          <input type="text" name="end" required onChange={(e) => setEndHour(e.target.value)} />
+          <label name="level">Level:</label>
+          <select required onChange={(e) => setLevel(e.target.value)} value={level}>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
           </select>
+          <label name="location">Location:</label>
+          <select name="location" required onChange={(e) => setLocation(e.target.value)} value={location}>
+            {courtList.map((court) => (
+              <option key={court.value} value={court.value}>
+                {court.label}
+              </option>
+            ))}
+          </select>
+          {err && (<p className="text-danger">{errMes}</p>)}
           <div className="button-container">
-            <input className="button" type="submit" value="Confirm"/>
-            <button onClick={() => navigate('/portal')}>Cancel</button>
+            <input className="button" type="submit" value="Confirm" />
+            <button onClick={() => navigate('/admin')}>Cancel</button>
           </div>
         </form>
       </div>
     </div>
-  )
+  );
 }
 
 export default AddLesson
