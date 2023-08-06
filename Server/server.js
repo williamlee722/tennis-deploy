@@ -214,7 +214,7 @@ app.post("/admin/getData", authenticateToken, (req, res) => {
                     message: "Not Admin!"
                 });
             } else {
-                UserInfos.find({}).then((userInfo) => {
+                UserInfos.find({}).sort({username: 1}).then((userInfo) => {
                     Bookings.find({}).sort({day: 1}).then((bookings) => {
                         Notifications.find({}).then((notifications) => {
                             res.send({
@@ -245,24 +245,39 @@ app.post("/admin/updateUser", authenticateToken, (req, res) => {
                     message: "Not Admin!"
                 });
             } else {
-                UserInfos.find({ username: req.data.username }).then((userInfo) => {
-                    feedString = req.data.username + " paid for " + req.data.credit + "."
-                    feedbackObj = {
-                        dateOfFeed: new Date(),
-                        feedback: feedString
-                    }
-                    feedbackList = userInfo.feedbacks
-                    feedbackList.append(feedbackObj)
-                }).then(() => {
-                    UserInfos.updateOne({ username: req.data.username }, {
-                        $set: { level: req.data.level, credits: req.data.credit, feedbacks: feedbackList }
-                    }).then((result) => {
-                        res.send({
-                            message: "User updated Successfully",
-                            result,
-                        });
+                const studentUserName = req.body.userInfoObject.username
+                const newLevel = req.body.userInfoObject.level
+                const newCredit = req.body.userInfoObject.credit
+                UserInfos.find({ username: studentUserName }).then((userInfo) => {
+                    
+                    if(userInfo.level != newLevel){
+                        feedString = "Your new level is " + newLevel
+                        feedbackObj = {
+                            dateOfFeed: new Date(),
+                            feedback: feedString
+                        }
+                        feedbackList = userInfo.feedbacks
+                        feedbackList.append(feedbackObj)
+                    }else{
+                        feedString = "Your new credit balance is " + newCredit
+                        feedbackObj = {
+                            dateOfFeed: new Date(),
+                            feedback: feedString
+                        }
+                        feedbackList = userInfo.feedbacks
+                        feedbackList.append(feedbackObj)
+                    }                        
+                    }).then(() => {
+                        UserInfos.updateOne({ username: studentUserName }, {
+                            $set: { level: newLevel, credits: newCredit, feedbacks: feedbackList }
+                        }).then((result) => {
+                            UserInfos.find({}).sort({username: 1}).then((userInfoList) => {
+                                res.send({
+                                    userInfos: userInfoList,
+                                })
+                            })
+                        })
                     })
-                })
             }
         });
     } catch (error) {

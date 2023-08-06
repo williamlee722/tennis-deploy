@@ -96,6 +96,41 @@ function Admin() {
       });
   }
 
+  const handleUserInfoChange = (index, event) => {
+    const { name, value } = event.target;
+    const userInfoObject = userInfoList[index]
+
+    switch (name) {
+      case 'credits':        
+        userInfoObject.credits = value
+        break;
+      case 'level':
+        userInfoObject.level = value
+        break;    
+    }
+
+    const configuration = {
+      method: 'post',
+      url: server_url + '/admin/updateLecture',
+      headers: {
+        Authorization: `Bearer ${cookies.get("Auth_TOKEN")}`,
+      },
+      data: {
+        userInfoObject: userInfoObject
+      }
+    };
+
+    axios(configuration)
+      .then((result) => {
+        setUserInfoList(result.data.userInfos);
+      })
+      .catch((error) => {
+        error = new Error();
+        cookies.remove("Auth_TOKEN", { path: "/" });
+        navigate("/login");
+      });
+  }
+
 
   return (
     <div className='admin'>
@@ -125,14 +160,13 @@ function Admin() {
                   userInfoList?.length > 0 && userInfoList.map((userInfo, index) => (
                     <tr key={index}>
                       <td>{userInfo.username}</td>
-                      {/* Add on click modal here */}
                       <td>
-                        <select value={userInfo.level}>
+                        <select value={userInfo.level} name='level' onChange={(event) => handleUserInfoChange(index, event)}>
                             <option value="beginner">Beginner</option>
                             <option value="intermediate">Intermediate</option>
                             <option value="advanced">Advanced</option>
                         </select></td>
-                      <td><input type='number' value={userInfo.credits} /></td>
+                      <td><input type='number' name='credits' value={userInfo.credits} onChange={(event) => handleUserInfoChange(index, event)}/></td>
                       <td><input type='submit'/></td>
                     </tr>
                   ))
