@@ -4,7 +4,6 @@ import '../../css/navbar.css'
 import Logo from '../../images/logo';
 import { useLocation } from 'react-router-dom'
 import { Squash as Hamburger } from 'hamburger-react';
-import user from '../../images/user.svg'
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -67,13 +66,13 @@ function Navbar() {
             {
               cookies.get("Auth_TOKEN") ? (
                 <>
-                  <li><a href='/login'>Login</a></li>
-                  <li><a href='/register'>Register</a></li>
+                  <li><a href='/portal'>Portal</a></li>
+                  <li><a href='/home' onClick={handleLogout}>Logout</a></li>
                 </>
               ) : (
                 <>
-                  <li><img style={{ width: '20px' }} src={user} alt="User" /></li>
-                  <li><a href='/home' onClick={handleLogout}>Logout</a></li>
+                  <li><a href='/login'>Login</a></li>
+                  <li><a href='/register'>Register</a></li>
                 </>
               )
             }

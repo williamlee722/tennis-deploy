@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { Link, Outlet, useLocation } from "react-router-dom";
 import '../css/portal.css'
 import '../css/calendar.css'
 import Logo from '../images/logo'
-// import Calendar from 'react-calendar'
 import ClassCalendar from '../components/portal/classCalendar'
 import axios from "axios";
 import Cookies from "universal-cookie";
@@ -19,7 +19,7 @@ function Portal() {
   const [feedbacksArr, setFeedbacksArr] = useState([]);
   const [events, setEvents] = useState([]);
 
-
+  const location = useLocation();
 
   useEffect(() => {
     const configuration = {
@@ -101,23 +101,22 @@ function Portal() {
         </div>
         <div className='portal-grid portal-credit'>
           <p className='portal-grid-title'>Credits: {credits}</p>
-          <a href='/'>Buy More</a>
+          <Link to="/payment" state={{ background: location }}>Add Credit</Link>
         </div>
         <div className='portal-grid portal-feedback'>
           <p className='portal-grid-title'>Feedback</p>
-          {/* {feedbacks} */}
           {feedbacksArr.map((feed, index) => (
             <p className='portal-grid-feedback' key={index}>
               <span>{feed.date}</span>: <span>{feed.text}</span>
             </p>
           ))}
-          {/* <p className='portal-grid-feedback'><span>June 28</span>: <span>Fronthand is getting better, keep up the good work!</span></p> */}
-          <a href='/'>More</a>
+          <Link to="/modal" state={{ background: location }}>View More</Link>
         </div>
         <div className='portal-grid portal-calender'>
           <p className='portal-grid-title'>Lessons</p>
 
           <ClassCalendar events={events} />
+          <Outlet />
         </div>
       </div>
     </div>

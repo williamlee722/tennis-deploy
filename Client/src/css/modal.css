@@ -1,0 +1,75 @@
+.modalDiv {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  background-color: rgba(0,0,0,.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  padding: 100px 50px;
+  background-color: white;
+  border-radius: 20px;
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-title{
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.modal-description{
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.modal form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.modal form input, .modal form label{
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.modal form input{
+  margin-bottom: 2rem;
+}
+
+.modal .button, .modal button{
+  height: fit-content;
+  width: fit-content;
+  border-radius: 1rem;
+  padding: .5rem 2rem;
+  cursor: pointer;
+  color: white;
+  background-color: rgb(26, 129, 226);
+  text-decoration: none;
+  border: none;
+  font-size: 1rem;
+}
+
+.modal button{
+  background-color: rgb(130, 130, 130);
+}
+
+.modal .button-container{
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
