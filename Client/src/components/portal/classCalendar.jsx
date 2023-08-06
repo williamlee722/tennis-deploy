@@ -38,7 +38,7 @@ const ClassCalendar = ({ events }) => {
         components={{
           event: EventDetails,
         }}
-        onSelectEvent={event => navigate('/details')}
+        onSelectEvent={event => navigate("/details/"+event)}
       />
     </div>
   );

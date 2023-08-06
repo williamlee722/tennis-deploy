@@ -31,8 +31,8 @@ function App() {
         <Route path='/portal' element={<ProtectedRoute><Portal/></ProtectedRoute>}/>
         <Route path='/admin' element={<ProtectedRoute><Admin/></ProtectedRoute>}/>
 
-        <Route path="/404" element={<Error404/>}/>
-        <Route path='/*' element={<Navigate to="/404"/>}/>
+        {/* <Route path="/404" element={<Error404/>}/>
+        <Route path='/*' element={<Navigate to="/404"/>}/> */}
       </Routes>
 
       {background && (

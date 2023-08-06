@@ -77,6 +77,7 @@ function Portal() {
         eventEndDate.setHours(Number(endHour), Number(endMinutes));
       
         eventsList.push({
+          id: event._id,
           title: event.level,
           day: event.day,
           start: eventStartDate,

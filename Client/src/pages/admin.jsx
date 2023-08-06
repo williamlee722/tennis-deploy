@@ -119,6 +119,7 @@ function Admin() {
                   <th>USERNAME</th>
                   <th>LEVEL</th>
                   <th>CREDIT</th>
+                  <th></th>
                 </tr>
                 {
                   userInfoList?.length > 0 && userInfoList.map((userInfo, index) => (
@@ -132,6 +133,7 @@ function Admin() {
                             <option value="advanced">Advanced</option>
                         </select></td>
                       <td><input type='number' value={userInfo.credits} /></td>
+                      <td><input type='submit'/></td>
                     </tr>
                   ))
                 }
