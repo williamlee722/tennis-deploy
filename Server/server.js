@@ -375,11 +375,6 @@ app.post("/admin/createFeedback", authenticateToken, async (req, res) => {
         const student = feedbackObj.username;
         const userInfo = await UserInfos.findOne({ username: student });
   
-        // if (!userInfo) {
-        //   console.log(`User ${student} not found in the database.`);
-        //   continue; // Move on to the next student
-        // }
-  
         const feedbackList = userInfo.feedbacks || [];
   
         // console.log(feedbackObj.feedback)
