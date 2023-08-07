@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useNavigation } from "react-router-dom";
 import '../css/register.css'
 import Logo from '../images/logo'
 import axios from "axios";
@@ -7,12 +7,16 @@ const server_url = process.env.REACT_APP_SERVER_BASE_URL;
 
 function Register() {
 
+  // console.log(useLocation().state)
+  const level = useLocation().state || 'beginner';
+  // console.log(level)
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
+
 
   const [err, setErr] = useState(false);
   const [errMes, setErrMes] = useState('');
@@ -39,7 +43,8 @@ function Register() {
           last_name: lastName,
           username: username,
           email: email,
-          password: password
+          password: password,
+          level: level
         }
       }
 

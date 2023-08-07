@@ -92,24 +92,25 @@ app.post("/login", (req, res) => {
 //Register
 
 app.post("/register", (req, res) => {
-    console.log(req.body.username, req.body.password);
+    try {
+        console.log(req.body.username, req.body.password);
 
-    if (!validator.isEmail(req.body.email)) {
-        res.status(400).send({
-            message: "Not a valid e-mail!",
-        });
-        return;
-    }
+        if (!validator.isEmail(req.body.email)) {
+            res.status(400).send({
+                message: "Not a valid e-mail!",
+            });
+            return;
+        }
 
-    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/g.test(req.body.password)) {
-        res.status(400).send({
-            message: "Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character!",
-        });
-        return;
-    }
-    else {
-        console.log("Legal password")
-    }
+        if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/g.test(req.body.password)) {
+            res.status(400).send({
+                message: "Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character!",
+            });
+            return;
+        }
+        else {
+            console.log("Legal password")
+        }
 
 
     // hash the password
@@ -127,7 +128,7 @@ app.post("/register", (req, res) => {
 
             const userInfo = new UserInfos({
                 username: req.body.username,
-                level: 'undecided',
+                level: req.body.level ?? 'undecided',
                 credits: 0,
                 feedbacks: [
                     {
@@ -155,6 +156,12 @@ app.post("/register", (req, res) => {
                     });
                 });
         });
+    } catch (error) {
+        res.status(400).send({
+            message: "Error occured!"
+        });
+    }
+    
 });
 
 // Get into portal
@@ -438,28 +445,35 @@ app.post("/payment/getData", authenticateToken, (req, res) => {
 
 // Notify credit
 app.post("/payment/notifyCredit", authenticateToken, (req, res) => {
-    const username = req.user.username
-    const date = new Date()
-    const creditAmount = req.body.creditAmount
-    const preferedZelleID = req.body.preferedZelleID
+    try {
+        const username = req.user.username
+        const date = new Date()
+        const creditAmount = req.body.creditAmount
+        const preferedZelleID = req.body.preferedZelleID
+        UserInfos.updateOne({username: username}, {$set: {preferedZelleID: preferedZelleID}})
 
-    const notification = new Notifications({
-        byUser: username,
-        day: date,
-        creditAmount: creditAmount
-    })
+        const notification = new Notifications({
+            byUser: username,
+            day: date,
+            creditAmount: creditAmount
+        })
 
-    notification.save().then((result) => {
-        res.send({
-            message: "Notification Created Successfully",
-            result,
+        notification.save().then((result) => {
+            res.send({
+                message: "Notification Created Successfully",
+                result,
+            });
+        }).catch((e) => {
+            console.log(e.message);
+            res.status(400).send({
+                message: "Notification creation not successful",
+            });
         });
-    }).catch((e) => {
-        console.log(e.message);
+    } catch (error) {
         res.status(400).send({
-            message: "Notification creation not successful",
-        });
-    });
+            message: "Error occured!"
+        });    
+    }    
 })
 
 // Join class
