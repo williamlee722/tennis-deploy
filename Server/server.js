@@ -352,6 +352,60 @@ app.post("/admin/createLecture", authenticateToken, (req, res) => {
     }
 })
 
+// Admin feedback create
+app.post("/admin/createFeedback", authenticateToken, async (req, res) => {
+    try {
+      const username = req.user.username;
+      const userInfo = await User.findOne({ username: username });
+  
+      // Check admin
+      if (!userInfo || !userInfo.isAdmin) { 
+        return res.status(400).send({ message: "Not Admin!" });
+      }
+  
+      // Check feedback
+      if (!req.body.feedbacks || req.body.feedbacks.length === 0) { 
+        return res.send({ message: "No feedbacks given" });
+      }
+  
+      const returnedFeedbacks = req.body.feedbacks;
+      // console.log(returnedFeedbacks)
+  
+      for (const feedbackObj of returnedFeedbacks) {
+        const student = feedbackObj.username;
+        const userInfo = await UserInfos.findOne({ username: student });
+  
+        // if (!userInfo) {
+        //   console.log(`User ${student} not found in the database.`);
+        //   continue; // Move on to the next student
+        // }
+  
+        const feedbackList = userInfo.feedbacks || [];
+  
+        // console.log(feedbackObj.feedback)
+        const newFeedback = {
+          dateOfFeed: new Date(),
+          feedback: feedbackObj.feedback,
+        };
+  
+        feedbackList.push(newFeedback);
+  
+        await UserInfos.updateOne(
+          { username: student },
+          { $set: { feedbacks: feedbackList } }
+        );
+      }
+  
+      res.send({
+        message: "Feedbacks Created Successfully",
+      });
+    } catch (error) {
+      console.error("Error:", error.message);
+      res.status(400).send({ message: "Failed to add feedbacks" });
+    }
+  });
+  
+
 // Payment get zelleID
 app.post("/payment/getData", authenticateToken, (req, res) => {
     try {

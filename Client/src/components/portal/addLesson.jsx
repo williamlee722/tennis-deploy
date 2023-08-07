@@ -21,7 +21,7 @@ function AddLesson() {
 
   // On submit
   const handleSubmit = (e) => {
-    console.log("submit clicked")
+    // console.log("submit clicked")
  
     e.preventDefault();
     const configuration = {
