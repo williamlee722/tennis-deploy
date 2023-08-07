@@ -109,3 +109,9 @@
   display: flex;
   justify-content: center;
 }
+
+@media screen and (max-width: 700px) {
+  .modal {
+    max-width: 80vw;
+  }
+}

@@ -7,9 +7,9 @@ import { Squash as Hamburger } from 'hamburger-react';
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
-var style_nav;
-
 function Navbar() {
+  let style_nav = "";
+
   const [show, setShow] = useState(true);
   const [isOpen, setOpen] = useState(false);
 

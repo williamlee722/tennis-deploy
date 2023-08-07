@@ -128,4 +128,12 @@
     .portal-grid{
         padding: 1rem 1rem;
     }
+
+    .portal-grid-feedback{
+        width: 90%
+    }
+
+    .portal-container{
+        width: 95%;
+    }
 }
