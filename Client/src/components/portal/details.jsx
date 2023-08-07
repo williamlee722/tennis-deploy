@@ -13,6 +13,7 @@ function Details() {
 
   const [retVal, setRetVal] = useState("");
   const [booking, setBooking] = useState({});
+  const [isMember, setMember] = useState(false);
 
   useEffect(() => {
     const configuration = {
@@ -45,6 +46,7 @@ function Details() {
             student += event.username + ' '
           })
           bookingob={
+            id: event._id,
             students: student,
             date: (event.day).slice(0,10),
             time: (event.start) + " - " + (event.end),
@@ -57,6 +59,29 @@ function Details() {
 
     setBooking(bookingob);
   }, [retVal]);
+
+  // On submit
+  const handleSubmit = (e) => {  
+    e.preventDefault();
+
+    const configuration = {
+      method: "post",
+      url: server_url + "/details/join",
+      headers: {
+        Authorization: `Bearer ${cookies.get("Auth_TOKEN")}`,
+      },
+      data: {
+        booking: booking
+      }
+    }
+
+    axios(configuration)
+      .then((result) => {
+        navigate('/portal')
+        window.location.reload();
+      }).catch((e) => {
+      });
+  }
   
   return (
     <div ref={modalRef} className="modalDiv">
@@ -91,7 +116,7 @@ function Details() {
           </tbody>
         </table>
         <div className="button-container">
-          <input className="button" type="submit" value="Confirm"/>
+          <input className="button" type="submit" value="Confirm" onClick={handleSubmit}/>
           <button onClick={() => navigate('/portal')}>Cancel</button>
         </div>
       </div>

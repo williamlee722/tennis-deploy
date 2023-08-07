@@ -413,6 +413,67 @@ app.post("/payment/notifyCredit", authenticateToken, (req, res) => {
     });
 })
 
+// Join class
+app.post("/details/join", authenticateToken, async (req, res) => {
+    const username = req.user.username;
+    const booking = req.body.booking;
+    let isMember = false;
+    let isFull = false;
+    let studentList = [];
+  
+    try {
+      console.log(booking.id);
+  
+      const result = await Bookings.findOne({ _id: booking.id });
+  
+      if (result.students != null) {
+        studentList = result.students;
+      }
+  
+      studentList.forEach((student) => {
+        if (username == student.username) {
+          isMember = true;
+        }
+      });
+  
+      if (studentList.length >= 4) {
+        isFull = true;
+      }
+  
+      if (isMember || isFull) {
+        res.send({
+          message: 0, // no change
+        });
+      } else {
+        const userInfo = await UserInfos.findOne({ username: username });
+  
+        if (userInfo.credits < 4) {
+          res.send({
+            message: 3, // no change due to no credit
+          });
+        } else {
+          const newBalance = userInfo.credits - 4;
+          await UserInfos.updateOne({ username: username }, { $set: { credits: newBalance } });
+          studentList.push({
+            username: username,
+            status: 1, // 1- Ok 2- Waitlist 3- Rejected
+          });
+          await Bookings.updateOne({ _id: booking.id }, { $set: { students: studentList } });
+          const resultBookings = await Bookings.find({});
+          res.send({
+            message: 'Joined class successfully',
+            bookings: resultBookings,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({
+        message: 'An error occurred',
+      });
+    }
+});
+
 app.listen(8000, () => {
     console.log("The server is up and running on port 8000");
 })
