@@ -57,9 +57,6 @@ function AddLesson() {
           <label name="date">Date:</label>
           <input className="date" type="date" required name="date" onChange={(e) => setDate(e.target.value)} />
           <label name="start">Starts At:</label>
-          <input type="time" name="start" required onChange={(e) => setStartHour(e.target.value)} />
-          <label name="end">Ends At:</label>
-          <input type="time" name="end" required onChange={(e) => setEndHour(e.target.value)} />
           <input className="date" type="time" name="start" required onChange={(e) => setStartHour(e.target.value)} />
           <label name="end">Ends At:</label>
           <input className="date" type="time" name="end" required onChange={(e) => setEndHour(e.target.value)} />
