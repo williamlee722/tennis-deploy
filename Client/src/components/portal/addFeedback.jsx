@@ -66,7 +66,7 @@ function AddFeedback() {
 
           {
             booking.students?.length > 0 && booking.students.map((student, index) => (
-              <div key={index}>
+              <div className="modal-title2" key={index}>
                 <label name="user">{student.username}:</label>
                 <textarea rows={5} style={{ border: "none", boxShadow: "rgba(0,0,0,.1) 0px 1.5px 0px" }} name="feedback" required onChange={(event) => handleFeedbackUpdate(index, event)}/>
               </div>

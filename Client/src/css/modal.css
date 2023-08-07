@@ -48,6 +48,11 @@
   text-align: center;
 }
 
+.modal-title2{
+  display: flex;
+  flex-direction: column;
+}
+
 .modal form input, .modal form textarea{
   margin-bottom: 2rem;
 }
