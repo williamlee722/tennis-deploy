@@ -199,8 +199,29 @@
     color: black;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 850px) {
     .admin-grid{
         padding: 1rem 1rem;
+    }
+
+    .admin-container{
+        width: 98%;
+    }
+
+    .admin-grid-table{
+        border-radius: 0px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .admin-grid-table th, .admin-grid-table td, .admin-grid-table td a{
+        font-size: .6rem ;
+        font-weight: 300;
+        text-align: center;
+        width: fit-content;
+    }
+    
+    .admin-grid-table select{
+        font-size: .5rem !important;
     }
 }

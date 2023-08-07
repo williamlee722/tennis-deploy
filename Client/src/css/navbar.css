@@ -98,7 +98,6 @@ nav ul li a > .active{
 @media screen and (max-width: 992px) {
     .nav-body{
         width: 100%;
-        height: 0;
     }
 
     nav{
@@ -123,15 +122,22 @@ nav ul li a > .active{
 
     .main{
         width: 100%;
+        height: 100vh;
         margin: 0;
         flex-direction: column;
+        color: black;
         background-color: white;
-        font-size: 1.5em;
+        font-size: 1.5rem;
         z-index: 9000;
     }
 
+    .main ul{
+        position: fixed;
+        top: 0;
+    }
+
     .main li{
-        height: 80px;
+        height: 180px;
         width: 100%;
         display: flex;
         align-items: center;
@@ -149,8 +155,8 @@ nav ul li a > .active{
     .sub{
         width: 100%;
         background-color: white;
-        margin-top: 0;
         font-size: 1.5em;
+        margin-bottom: 200px;
     }
 
     .sub li{
@@ -182,7 +188,6 @@ nav ul li a > .active{
     }
 
     .nav-area{
-        position: fixed;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;

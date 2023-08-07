@@ -36,3 +36,17 @@
         font-size: 1.2rem;
     }
 }
+
+@media screen and (max-width: 700px) {
+    .calendar{
+        width: 90vw;
+        height: 50vh;
+        margin-top: 10px;
+        border-radius: 0;
+        padding: 5px;
+    }
+
+    .custom-event-wrapper{
+        font-size: .8rem;
+    }
+}
