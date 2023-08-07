@@ -31,7 +31,6 @@ function Portal() {
 
     axios(configuration)
       .then((result) => {
-        console.log(result.data.username)
         setRetVal(result.data);
       })
       .catch((error) => {
@@ -84,10 +83,10 @@ function Portal() {
           end: eventEndDate,
           status: event.status,
           location: event.location,
-          description: event.description
+          description: event.description,
+          students: event.students
         })
       });
-      console.log(eventsList)      
     }
 
     setEvents(eventsList);
@@ -120,10 +119,12 @@ function Portal() {
           {feedbacksArr.map((feed, index) => (
             <div className='portal-grid-feedback' key={index}>
               <table>
-                <tr>
-                  <td>{feed.date}</td>
-                  <td>{feed.text}</td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td>{feed.date}</td>
+                    <td>{feed.text}</td>
+                  </tr>
+                </tbody>
               </table>
               <Link to="/feedback" state={{ background: location }}>View More</Link>
             </div>

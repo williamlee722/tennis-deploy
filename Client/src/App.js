@@ -39,7 +39,7 @@ function App() {
         <Routes>
           <Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
           <Route path="/feedback" element={<Feedback />} />
-          <Route path="/details" element={<Details />} />
+          <Route path="/details/:id" element={<ProtectedRoute><Details /></ProtectedRoute>} />
           <Route path="/addlesson" element={<ProtectedRoute><AddLesson /></ProtectedRoute>} />
           <Route path="/addfeedback" element={<ProtectedRoute><AddFeedback /></ProtectedRoute>} />
           <Route path="/notifications" element={<Notifications />} />
