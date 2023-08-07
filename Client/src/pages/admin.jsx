@@ -199,7 +199,7 @@ function Admin() {
                   bookingsList?.length > 0 && bookingsList.map((booking, index) => (
                     <tr key={index}>
                       <td className='date-tr'><input type='date' name= 'day' value={new Date(booking.day).toISOString().split('T')[0]}  onChange={(event) => handleBookingChange(index, event)}/></td>
-                      <td className='addfeedback'><Link to="/addfeedback" state={{ background: location }}>{booking.students.map((student) => student.username).join(', ')}</Link></td>
+                      <td className='addfeedback'><Link to="/addfeedback" state={{ background: location, booking: booking }}>{booking.students.map((student) => student.username).join(', ')}</Link></td>
                       <td>{booking.level.charAt(0).toUpperCase() + booking.level.slice(1)}</td>
                       <td><select value={booking.location} name='location'  onChange={(event) => handleBookingChange(index, event)}>
                       {courtList.map((court) => (

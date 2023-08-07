@@ -48,20 +48,19 @@ function Portal() {
     let feedArr = []
 
     if (retVal.feedbacks?.length > 0) {
-      const dateString = retVal.feedbacks[0].dateOfFeed;
+      for (let index = 0; index < retVal.feedbacks.length; index++) {
+        
+        const dateString = retVal.feedbacks[index].dateOfFeed;
 
-      const date = new Date(dateString);
+        const date = new Date(dateString)
 
-      const options = {
-        month: 'long',
-        day: '2-digit',
-      };
+        const formattedDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: '2-digit'}).format(date);
 
-      const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
-
-      feedArr.push({ date: formattedDate, text: retVal.feedbacks[0].feedback });
+        feedArr.push({ date: formattedDate, text: retVal.feedbacks[index].feedback });
+      }
     }
     setFeedbacksArr(feedArr);
+    console.log(feedbacksArr)
 
     let eventsList = [];
 
@@ -116,19 +115,17 @@ function Portal() {
         </div>
         <div className='portal-grid portal-feedback'>
           <p className='portal-grid-title'>Feedback</p>
-          {feedbacksArr.map((feed, index) => (
-            <div className='portal-grid-feedback' key={index}>
+          {feedbacksArr?.length > 0 && (
+            <div className='portal-grid-feedback'>
               <table>
-                <tbody>
-                  <tr>
-                    <td>{feed.date}</td>
-                    <td>{feed.text}</td>
-                  </tr>
-                </tbody>
+                <tr>
+                  <td>{feedbacksArr[feedbacksArr.length - 1].date}</td>
+                  <td>{feedbacksArr[feedbacksArr.length - 1].text}</td>
+                </tr>
               </table>
-              <Link to="/feedback" state={{ background: location }}>View More</Link>
+              <Link to="/feedback" state={{ background: location, feedbacks: feedbacksArr }}>View More</Link>
             </div>
-          ))}
+          )}
         </div>
         <div className='portal-grid portal-calender'>
           <p className='portal-grid-title'>Lessons</p>
