@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import '../css/portal.css'
 import '../css/calendar.css'
 import Logo from '../images/logo'
@@ -131,7 +131,7 @@ function Portal() {
           <p className='portal-grid-title'>Lessons</p>
 
           <ClassCalendar events={events} />
-          <Outlet />
+          <p style={{textAlign:"center"}}><span>* In order to cancel your bookings, please contact the coach directly at <a style={{textDecoration:"none", color:"black"}} href='mailto:tennist@gmail.com'>tennist@gmail.com</a></span></p>
         </div>
       </div>
     </div>

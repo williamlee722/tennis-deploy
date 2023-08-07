@@ -14,6 +14,9 @@ import Error404 from "./pages/404";
 import Notifications from "./components/portal/notifications";
 import Details from "./components/portal/details";
 import AddFeedback from "./components/portal/addFeedback";
+import First from "./components/survey/first";
+import Second from "./components/survey/second";
+import Third from "./components/survey/third";
 
 function App() {
   const location = useLocation();
@@ -30,6 +33,12 @@ function App() {
         
         <Route path='/portal' element={<ProtectedRoute><Portal/></ProtectedRoute>}/>
         <Route path='/admin' element={<ProtectedRoute><Admin/></ProtectedRoute>}/>
+
+        <Route path='survey' element={<Survey/>}>
+          <Route path="1" element={<First />}/>
+          <Route path="2" element={<Second />}/>
+          <Route path="3" element={<Third />}/>
+        </Route>
 
         {/* <Route path="/404" element={<Error404/>}/>
         <Route path='/*' element={<Navigate to="/404"/>}/> */}

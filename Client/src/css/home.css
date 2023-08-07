@@ -72,10 +72,11 @@
 }
 
 .home-info-desc2 a{
+    line-height: 2;
     text-decoration: none;
     color: black;
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 2rem;
 }
 
 .home-info-desc2 a:hover{
@@ -111,5 +112,10 @@
     .home-info-img, .home-info-img2{
         width: 70%;
         margin: auto;
+    }
+
+    .home-info-desc2 a{
+        line-height: 2;
+        font-size: 3rem;
     }
 }

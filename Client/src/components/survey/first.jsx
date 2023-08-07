@@ -1,9 +1,11 @@
 import React from 'react'
 
-function first() {
+function First() {
   return (
-    <div>first</div>
+    <div>
+      <p><span>You understand the basic rules of tennis and have played at least a few time</span></p>
+    </div>
   )
 }
 
-export default first
+export default First

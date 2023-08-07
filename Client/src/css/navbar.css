@@ -98,6 +98,7 @@ nav ul li a > .active{
 @media screen and (max-width: 992px) {
     .nav-body{
         width: 100%;
+        height: 0;
     }
 
     nav{
@@ -188,6 +189,8 @@ nav ul li a > .active{
     }
 
     .nav-area{
+        position: fixed;
+        top: 0;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
