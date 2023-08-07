@@ -47,11 +47,11 @@ function App() {
       {background && (
         <Routes>
           <Route path="/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
-          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/feedback" element={<ProtectedRoute><Feedback /></ProtectedRoute>} />
           <Route path="/details/:id" element={<ProtectedRoute><Details /></ProtectedRoute>} />
           <Route path="/addlesson" element={<ProtectedRoute><AddLesson /></ProtectedRoute>} />
           <Route path="/addfeedback" element={<ProtectedRoute><AddFeedback /></ProtectedRoute>} />
-          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
         </Routes>
       )}
     </div>

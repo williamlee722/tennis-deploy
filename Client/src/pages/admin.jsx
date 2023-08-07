@@ -14,6 +14,7 @@ function Admin() {
   const levels = [{key: "beginner", value: 'Beginner'}, {key: 'intermediate', value: 'Intermediate'}, {key: 'advance', value: 'Advance'}]
   const [bookingsList, setBookingsList] = useState([])
   const [userInfoList, setUserInfoList] = useState([])
+  const [notificationList, setnotificationList] = useState([])
   const [retVal, setRetVal] = useState({});
   const navigate = useNavigate();
 
@@ -44,6 +45,7 @@ function Admin() {
     if(retVal){
       setBookingsList(retVal.bookings)
       setUserInfoList(retVal.userInfos)
+      setnotificationList(retVal.notifications)
       // console.log(bookingsList)
       // if(bookingsList){
       //   bookingsList.forEach(element => {
@@ -141,7 +143,7 @@ function Admin() {
   return (
     <div className='admin'>
       <ul className='admin-user-btn'>
-        <li><Link to="/notifications" state={{ background: location }}>Notifications</Link></li>
+        <li><Link to="/notifications" state={{ background: location, notifications: notificationList }}>Notifications</Link></li>
         <li><a className='logout' href='/home' onClick={handleLogout}>Logout</a></li>
       </ul>
       <div className='admin-container'>

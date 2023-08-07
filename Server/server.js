@@ -528,6 +528,31 @@ app.post("/details/join", authenticateToken, async (req, res) => {
     }
 });
 
+// Admin data
+app.post("/admin/getNotification", authenticateToken, (req, res) => {
+    // Check if admin first
+    try {
+        const username = req.user.username
+        User.findOne({ username: username }).then((userInfo) => {
+            if (!userInfo.isAdmin) {
+                res.status(400).send({
+                    message: "Not Admin!"
+                });
+            } else {
+                Notifications.find({}).then((notifications) => {
+                    res.send({
+                        notifications: notifications
+                    });
+                })
+            }
+        });
+    } catch (error) {
+        res.status(400).send({
+            message: "Not Admin!"
+        });
+    }
+})
+
 app.listen(8000, () => {
     console.log("The server is up and running on port 8000");
 })
