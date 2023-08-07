@@ -133,7 +133,7 @@ app.post("/register", (req, res) => {
                 feedbacks: [
                     {
                         dateOfFeed: new Date().setHours(0, 0, 0, 0),
-                        feedback: "Wellcome to tennist"
+                        feedback: "Welcome to tennist"
                     }
                 ]
             })
