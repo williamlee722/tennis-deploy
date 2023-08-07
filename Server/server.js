@@ -247,26 +247,26 @@ app.post("/admin/updateUser", authenticateToken, (req, res) => {
             } else {
                 const studentUserName = req.body.userInfoObject.username
                 const newLevel = req.body.userInfoObject.level
-                const newCredit = req.body.userInfoObject.credit
-                UserInfos.find({ username: studentUserName }).then((userInfo) => {
-                    
-                    if(userInfo.level != newLevel){
+                const newCredit = req.body.userInfoObject.credits
+                let feedbackList = req.body.userInfoObject.feedbacks
+                UserInfos.findOne({ username: studentUserName }).then((userInfo) => {
+                    if(userInfo.level !== newLevel){
                         feedString = "Your new level is " + newLevel
                         feedbackObj = {
                             dateOfFeed: new Date(),
                             feedback: feedString
                         }
-                        feedbackList = userInfo.feedbacks
-                        feedbackList.append(feedbackObj)
-                    }else{
+
+                        feedbackList.push(feedbackObj)
+                    }
+                    if(userInfo.credits !== newCredit){
                         feedString = "Your new credit balance is " + newCredit
                         feedbackObj = {
                             dateOfFeed: new Date(),
                             feedback: feedString
                         }
-                        feedbackList = userInfo.feedbacks
-                        feedbackList.append(feedbackObj)
-                    }                        
+                        feedbackList.push(feedbackObj)
+                    }                    
                     }).then(() => {
                         UserInfos.updateOne({ username: studentUserName }, {
                             $set: { level: newLevel, credits: newCredit, feedbacks: feedbackList }

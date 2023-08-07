@@ -53,6 +53,7 @@ function Admin() {
     }    
   },[retVal])
 
+
   const handleLogout = () => {
     cookies.remove("Auth_TOKEN", { path: "/" });
   };
@@ -98,20 +99,25 @@ function Admin() {
 
   const handleUserInfoChange = (index, event) => {
     const { name, value } = event.target;
+
+    setUserInfoList((prevUserInfoList) =>
+      prevUserInfoList.map((userInfo, idx) => {
+        if (idx === index) {
+          return {
+            ...userInfo,
+            [name]: value,
+          };
+        }
+        return userInfo;
+      })
+    );
+  };
+
+  const submitUserInfoChange = (index, event) => {
     const userInfoObject = userInfoList[index]
-
-    switch (name) {
-      case 'credits':        
-        userInfoObject.credits = value
-        break;
-      case 'level':
-        userInfoObject.level = value
-        break;    
-    }
-
     const configuration = {
       method: 'post',
-      url: server_url + '/admin/updateLecture',
+      url: server_url + '/admin/updateUser',
       headers: {
         Authorization: `Bearer ${cookies.get("Auth_TOKEN")}`,
       },
@@ -167,7 +173,7 @@ function Admin() {
                             <option value="advanced">Advanced</option>
                         </select></td>
                       <td><input type='number' name='credits' value={userInfo.credits} onChange={(event) => handleUserInfoChange(index, event)}/></td>
-                      <td><input type='submit'/></td>
+                      <td><input type='submit' onClick={(event) => submitUserInfoChange(index, event)}/></td>
                     </tr>
                   ))
                 }
