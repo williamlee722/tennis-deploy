@@ -17,6 +17,8 @@ import AddFeedback from "./components/portal/addFeedback";
 import First from "./components/survey/first";
 import Second from "./components/survey/second";
 import Third from "./components/survey/third";
+import Start from "./components/survey/start";
+import Result from "./components/survey/result";
 
 function App() {
   const location = useLocation();
@@ -35,9 +37,11 @@ function App() {
         <Route path='/admin' element={<ProtectedRoute><Admin/></ProtectedRoute>}/>
 
         <Route path='survey' element={<Survey/>}>
+          <Route path='' element={<Start/>}/>
           <Route path="1" element={<First />}/>
           <Route path="2" element={<Second />}/>
           <Route path="3" element={<Third />}/>
+          <Route path="result" element={<Result />}/>
         </Route>
 
         {/* <Route path="/404" element={<Error404/>}/>
