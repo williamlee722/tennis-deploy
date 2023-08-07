@@ -3,6 +3,8 @@ import { useNavigate, useLocation, useNavigation } from "react-router-dom";
 import '../css/register.css'
 import Logo from '../images/logo'
 import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 const server_url = process.env.REACT_APP_SERVER_BASE_URL;
 
 function Register() {
@@ -25,7 +27,7 @@ function Register() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (regSuccess) {
+    if (regSuccess) {        
       navigate("/portal");
     }
   }, [regSuccess]);
@@ -52,6 +54,12 @@ function Register() {
         .then((result) => {
           // console.log(result);
           alert("Registration successful.");
+          cookies.remove("Auth_TOKEN", { path: "/" });
+
+          cookies.set("Auth_TOKEN", result.data.token, {
+            path: "/",
+            expires: new Date(Date.now() + (3600 * 1000)),
+          });
           setRegSuccess(true);
         }).catch((e) => {
           setErr(true);

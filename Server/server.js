@@ -144,11 +144,20 @@ app.post("/register", (req, res) => {
                 .save()
                 // return success if the new user is added to the database successfully
                 .then((result) => {
-                    userInfo.save()
-                    res.send({
-                        message: "User Created Successfully",
-                        result,
-                    });
+                    userInfo.save().then(() => {
+                        const token = jwt.sign(
+                            {
+                                userId: user._id,
+                                username: user.username,
+                            },
+                            process.env.JWT_SECRET_KEY,
+                            { expiresIn: '1h' }
+                        );
+                        res.send({
+                            message: "User Created Successfully",
+                            token,
+                        });
+                    })                    
                 }).catch((e) => {
                     console.log(e.message);
                     res.status(400).send({
